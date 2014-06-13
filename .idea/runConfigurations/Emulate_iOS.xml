@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Emulate_iOS" type="BashConfigurationType" factoryName="Bash" singleton="true">
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="INTERPRETER_PATH" value="/bin/bash" />
+    <option name="WORKING_DIRECTORY" value="" />
+    <option name="PARENT_ENVS" value="true" />
+    <envs />
+    <module name="" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../dev_scripts/emulate_ios.sh" />
+    <option name="PARAMETERS" value="" />
+    <RunnerSettings RunnerId="BashRunner" />
+    <ConfigurationWrapper RunnerId="BashRunner" />
+    <method />
+  </configuration>
+</component>
