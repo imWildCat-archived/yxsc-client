@@ -1,0 +1,22 @@
+<ion-view title="阅读新闻">
+    <ion-nav-buttons side="left">
+        <!--<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>-->
+    </ion-nav-buttons>
+    <ion-content class="has-header schoolnews-list">
+        <div class="card">
+            <div class="item item-text-wrap">
+               <h2> {{ news.subject }}</h2>
+            </div>
+        </div>
+
+        <div class="list card">
+
+
+
+            <div class="item item-body">
+                <div ng-bind-html="news.content"></div>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

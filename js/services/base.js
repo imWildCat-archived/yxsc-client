@@ -6,10 +6,12 @@
  */
 
 (function () {
-    angular.module('app.services.base', ['ngCookies','ionic', 'toaster', 'app.config'])
-        .service('BaseHttpService', ['$http','$cookies', '$ionicLoading', 'toaster', 'appConf', 'errorMessages'
-            , function ($http,$cookies, $ionicLoading, toaster, appConf, errorMessages) {
-                var BaseHttpService = {};
+    angular.module('app.services.base', ['ionic', 'toaster', 'app.config'])
+        .service('BaseHttpService', ['$http', '$ionicLoading', 'toaster', 'appConf', 'errorMessages'
+            , function ($http, $ionicLoading, toaster, appConf, errorMessages) {
+                var BaseHttpService = {
+                    _csrf: ''
+                };
 
                 /**
                  * 对ionic loading进行简单封装
@@ -39,8 +41,8 @@
                  */
                 BaseHttpService.get = function (uri, params, successCallback, errorCallback) {
                     $http({
-                        method:'GET',
-                        url:appConf.baseUrl + uri,
+                        method: 'GET',
+                        url: appConf.baseUrl + uri,
                         params: params,
                         timeout: appConf.timeout,
                         responseType: 'json'
@@ -61,14 +63,14 @@
                  * @param errorCallback {Function}
                  */
                 BaseHttpService.post = function (uri, params, successCallback, errorCallback) {
-                    params._csrf = $cookies._csrf; // TODO: 跨域限制，不能用cookies!
+//                    params._csrf = this._csrf;
                     $http({
-                        method:'POST',
-                        url:appConf.baseUrl + uri,
+                        method: 'POST',
+                        url: appConf.baseUrl + uri,
                         params: params,
                         timeout: appConf.timeout,
                         responseType: 'json',
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'/*,'x-csrf-token':$cookies._csrf*/}
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded','x-csrf-token':this._csrf}
                     }).success(function (res) {
                         successCallback(res);
                     }).error(function (error) {
@@ -81,12 +83,13 @@
                 /**
                  * GET: 附加UI响应(包含错误响应)
                  * @param uri {String}
+                 * @param params {Object}
                  * @param successCallback {Function}
                  * @param errorCallback {Function}
                  */
-                BaseHttpService.getWithUi = function (uri, successCallback, errorCallback) {
+                BaseHttpService.getWithUi = function (uri,params, successCallback, errorCallback) {
                     uiLoading.show();
-                    this.get(uri, null, function (res) {
+                    this.get(uri, params, function (res) {
                         uiLoading.hide();
                         // 请求成功， 但是需求判断status， 判定操作是否成功
                         if (res.status === 1) {
@@ -137,7 +140,16 @@
                     });
                 };
 
+                BaseHttpService.getCsrf = function () {
+                    this.get('/get_csrf', null, function (res) {
+                        if (res.status === 1 && res.data.csrf) {
+                            BaseHttpService._csrf = res.data.csrf;
+                        }
+                    });
+                };
 
                 return BaseHttpService;
             }]);
+
+
 })();

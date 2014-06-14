@@ -12,11 +12,12 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 (function () {
-    const TEMPLATES_DIR = 'templates/';
+    const VIEWS_DIR = 'views/';
 
     angular.module('sdufe-client', ['ionic',
         'app.controllers',
-        'app.controllers.user'])
+        'app.controllers.User',
+        'app.controllers.SchoolNews'])
 
         .run(function ($ionicPlatform) {
             $ionicPlatform.ready(function () {
@@ -38,7 +39,7 @@
                 .state('app', {
                     url: "/app",
                     abstract: true,
-                    templateUrl: "templates/menu.html",
+                    templateUrl: "views/menu.html",
                     controller: 'AppCtrl'
                 })
 
@@ -46,7 +47,7 @@
                     url: "/search",
                     views: {
                         'menuContent': {
-                            templateUrl: "templates/search.html"
+                            templateUrl: "views/search.html"
                         }
                     }
                 })
@@ -56,7 +57,7 @@
                     url: '/index',
                     views: {
                         'menuContent': {
-                            templateUrl: 'templates/index.html'
+                            templateUrl: 'views/index.html'
                         }
                     }
                 })
@@ -65,7 +66,7 @@
                     url: "/browse",
                     views: {
                         'menuContent': {
-                            templateUrl: "templates/browse.html"
+                            templateUrl: "views/browse.html"
                         }
                     }
                 })
@@ -73,7 +74,7 @@
                     url: "/playlists",
                     views: {
                         'menuContent': {
-                            templateUrl: "templates/playlists.html",
+                            templateUrl: "views/playlists.html",
                             controller: 'PlaylistsCtrl'
                         }
                     }
@@ -83,7 +84,7 @@
                     url: "/playlists/:playlistId",
                     views: {
                         'menuContent': {
-                            templateUrl: "templates/playlist.html",
+                            templateUrl: "views/playlist.html",
                             controller: 'PlaylistCtrl'
                         }
                     }
@@ -93,37 +94,55 @@
         })
 
         .config(function ($stateProvider) {
-            const USER_TEMPLATES_DIR = TEMPLATES_DIR + 'user/';
+            const USER_VIEWS_DIR = VIEWS_DIR + 'user/';
             $stateProvider
                 .state('user', {
                     url: "/user",
                     abstract: true,
-                    templateUrl: "templates/menu.html",
+                    templateUrl: "views/menu.html",
                     controller: 'AppCtrl'
-                })
-
-                .state('user.index', {
-                    url: '/index',
-                    views: {
-                        'menuContent': {
-                            templateUrl: USER_TEMPLATES_DIR + 'index.html',
-                            controller: 'User.TestCtrl'
-                        }
-                    }
                 })
 
                 .state('user.reg', {
                     url: '/reg',
                     views: {
                         menuContent: {
-                            templateUrl: USER_TEMPLATES_DIR + 'reg.html',
-                            controller: 'User.RegCtrl'
+                            templateUrl: USER_VIEWS_DIR + 'reg.html',
+                            controller: 'UserCtrl.Reg'
                         }
                     }
                 })
+        })
 
-            // if none of the above states are matched, use this as the fallback
-//        $urlRouterProvider.otherwise('/user/index');
-        });
+        .config(function ($stateProvider) {
+            const SCHOOL_NEWS_VIEWS_DIR = VIEWS_DIR + 'school_news/';
+            $stateProvider
+                .state('schoolNews', {
+                    url: "/schoolNews",
+                    abstract: true,
+                    templateUrl: "views/menu.html",
+                    controller: 'AppCtrl'
+                })
+                .state('schoolNews.list', {
+                    url: '/list',
+                    views: {
+                        menuContent: {
+                            templateUrl: SCHOOL_NEWS_VIEWS_DIR + 'list.html',
+                            controller: 'SchoolNewsCtrl.list'
+                        }
+                    }
+                })
+                .state('schoolNews.single', {
+                    url:'/single/:id',
+                    views: {
+                        menuContent:{
+                            templateUrl:SCHOOL_NEWS_VIEWS_DIR + 'single.html',
+                            controller: 'SchoolNewsCtrl.single'
+                        }
+                    }
+                })
+        })
+    ;
+
 })();
 
