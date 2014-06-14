@@ -14,6 +14,7 @@ angular.module('app.controllers', [])
         ];
     })
 
-    .controller('PlaylistCtrl', function ($scope, $stateParams) {
+    .controller('PlaylistCtrl', function ($scope,$location, $stateParams) {
         console.log($stateParams);
+        $location.path('/index');
     })

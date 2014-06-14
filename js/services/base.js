@@ -7,8 +7,8 @@
 
 (function () {
     angular.module('app.services.base', ['ionic', 'toaster', 'app.config'])
-        .service('BaseHttpService', ['$http', '$ionicLoading', 'toaster', 'appConf', 'errorMessages'
-            , function ($http, $ionicLoading, toaster, appConf, errorMessages) {
+        .service('BaseHttpService', ['$http', '$location', '$ionicLoading', 'toaster', 'appConf', 'errorMessages'
+            , function ($http, $location, $ionicLoading, toaster, appConf, errorMessages) {
                 var BaseHttpService = {
                     _csrf: ''
                 };
@@ -27,6 +27,23 @@
                     },
                     hide: function () {
                         $ionicLoading.hide();
+                    }
+                };
+
+                /**
+                 * 错误处理
+                 * @param res {Object}
+                 * @private
+                 */
+                var _errorHandler = function (res) {
+                    toaster.pop('warning', '呃，出错啦', errorMessages[res.error.code]);
+                    switch (res.error.code) {
+                        case 1001:
+                            // 若用户未登录，跳转到登录页
+                            $location.path('/user/login');
+                            break;
+                        default:
+                            break;
                     }
                 };
 
@@ -70,7 +87,7 @@
                         params: params,
                         timeout: appConf.timeout,
                         responseType: 'json',
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded','x-csrf-token':this._csrf}
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded', 'x-csrf-token': this._csrf}
                     }).success(function (res) {
                         successCallback(res);
                     }).error(function (error) {
@@ -87,7 +104,7 @@
                  * @param successCallback {Function}
                  * @param errorCallback {Function}
                  */
-                BaseHttpService.getWithUi = function (uri,params, successCallback, errorCallback) {
+                BaseHttpService.getWithUi = function (uri, params, successCallback, errorCallback) {
                     uiLoading.show();
                     this.get(uri, params, function (res) {
                         uiLoading.hide();
@@ -95,7 +112,8 @@
                         if (res.status === 1) {
                             successCallback(res.data);
                         } else {
-                            toaster.pop('warning', '出错啦', errorMessages[res.error.code]);
+                            _errorHandler(res);
+
                             if (errorCallback) {
                                 errorCallback(res);
                             }
@@ -125,7 +143,8 @@
                         if (res.status === 1) {
                             successCallback(res.data);
                         } else {
-                            toaster.pop('warning', '出错啦', errorMessages[res.error.code]);
+                            _errorHandler(res);
+
                             if (errorCallback) {
                                 errorCallback(res);
                             }
