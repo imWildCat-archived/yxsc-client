@@ -1,32 +1,13 @@
-This is an addon starter template for the [Ionic Framework](http://ionicframework.com/).
+yxsc-client 印象·山财 客户端
+========
+本项目基于 [Ionic Framework](http://ionicframework.com/) 构建。  
+是由[@imWildCat](http://wildcat.name)(种道涵)组织的团队**EiND Studio**参加 [齐鲁大学生软件大赛](http://softqilu.com) 时创建的项目。指导老师： 高珊珊。
 
-## How to use this template
+## EiND Studio
+EiND Studio是由三名来自山东财经大学的同学创建的团队。创始人如下：  
+- 种道涵 (队长/技术负责人, @imWildCat)  
+- 罗昶 (用户体验负责人， 团队命名者)  
+- 杨亚东 (运营负责人)  
 
-*This template does not work on its own*. It is missing the Ionic library, and AngularJS.
-
-To use this, either create a new ionic project using the ionic node.js utility, or copy and paste this into an existing Cordova project and download a release of Ionic separately.
-
-### With the Ionic tool:
-
-Take the name after `ionic-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myApp sidemenu
-```
-
-Then, to run it, cd into `myApp` and run:
-
-```bash
-$ ionic platform add ios
-$ ionic build ios
-$ ionic emulate ios
-```
-
-Substitute ios for android if not on a Mac, but if you can, the ios development toolchain is a lot easier to work with until you need to do anything custom to Android.
-
-## Demo
-http://plnkr.co/edit/0RXSDB?p=preview
-
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/contribute/#issues) to the main Ionic repository. On the other hand, pull requests are welcome here!
+## LICENSE 开源协议
+The MIT License.
