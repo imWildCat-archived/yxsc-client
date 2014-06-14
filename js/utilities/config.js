@@ -8,8 +8,8 @@
 (function () {
     angular.module('app.config', []).constant('appConf',
         {
-//            baseUrl: 'http://localhost:18080/api/v1',
-            baseUrl: 'http://yinxiangshancai.duapp.com/api/v1',
+            baseUrl: 'http://localhost:18080/api/v1',
+//            baseUrl: 'http://yinxiangshancai.duapp.com/api/v1',
             httpTimeout:30
         })
 //        .constant('CONF_BASE_URL','http://localhost:18080/api/vi')
@@ -18,6 +18,7 @@
         .constant('errorMessages',{
             // 1001 ~ 1999 , 与用户相关的错误
             1001: '您尚未登录，请登录',
+            1002:'用户名或密码错误',
             1004: '您的money不够啦',
 
             1101:'用户名已被使用',

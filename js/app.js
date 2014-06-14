@@ -39,7 +39,7 @@
                 .state('app', {
                     url: "/app",
                     abstract: true,
-                    templateUrl: "views/menu.html",
+                    templateUrl: VIEWS_DIR + 'menu.html',
                     controller: 'AppCtrl'
                 })
 
@@ -99,7 +99,7 @@
                 .state('user', {
                     url: "/user",
                     abstract: true,
-                    templateUrl: "views/menu.html",
+                    templateUrl: VIEWS_DIR + 'menu.html',
                     controller: 'AppCtrl'
                 })
 
@@ -112,6 +112,16 @@
                         }
                     }
                 })
+
+                .state('user.login', {
+                    url: '/login',
+                    views: {
+                        menuContent: {
+                            templateUrl: USER_VIEWS_DIR + 'login.html',
+                            controller: 'UserCtrl.Login'
+                        }
+                    }
+                })
         })
 
         .config(function ($stateProvider) {
@@ -120,7 +130,7 @@
                 .state('schoolNews', {
                     url: "/schoolNews",
                     abstract: true,
-                    templateUrl: "views/menu.html",
+                    templateUrl: VIEWS_DIR + 'menu.html',
                     controller: 'AppCtrl'
                 })
                 .state('schoolNews.list', {
@@ -133,13 +143,24 @@
                     }
                 })
                 .state('schoolNews.single', {
-                    url:'/single/:id',
+                    url: '/single/:id',
                     views: {
-                        menuContent:{
-                            templateUrl:SCHOOL_NEWS_VIEWS_DIR + 'single.html',
+                        menuContent: {
+                            templateUrl: SCHOOL_NEWS_VIEWS_DIR + 'single.html',
                             controller: 'SchoolNewsCtrl.single'
                         }
                     }
+                })
+        })
+
+        .config(function ($stateProvider) {
+            const TOPIC_VIEWS_DIR = VIEWS_DIR + 'topic/';
+            $stateProvider
+                .state('topic', {
+                    url: 'topic',
+                    abstract: true,
+                    templateUrl: VIEWS_DIR + 'menu.html',
+                    controller: 'AppCtrl'
                 })
         })
     ;

@@ -27,6 +27,22 @@
             });
         };
 
+        /**
+         * 用户登录
+         * @param loginUser {Object}
+         * @param successCallback {Function}
+         */
+        UserService.login = function (loginUser, successCallback) {
+            BaseHttpService.postWithUi('/user/login', loginUser, function (data) {
+                UserService.currentUser = data;
+                successCallback(data);
+            })
+        };
+
+        UserService.logout = function(successCallback){
+
+        };
+
         return UserService;
     }]);
 

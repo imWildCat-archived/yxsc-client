@@ -25,9 +25,27 @@
                 UserService.reg($scope.newUser, function (data) {
                     toaster.pop('success', '注册成功');
                     $window.history.back();
-                    console.log(data);
                 });
                 console.log($scope.newUser);
             };
         })
+
+        // 登录 Controller
+        .controller(CTRL_PRE + 'Login', function ($scope, $window, toaster, UserService) {
+            $scope.loginUser = {};
+
+            UserService.getCsrf();
+
+            /**
+             * 登录按钮点击
+             */
+            $scope.loginFormSubmit = function () {
+                console.log($scope.loginUser);
+                UserService.login($scope.loginUser, function (data) {
+                    toaster.pop('success', '登录成功');
+                    $window.history.back();
+                });
+            }
+        })
+    ;
 })();

@@ -1,0 +1,13 @@
+<ion-view title="寻物启事">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+        <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header lost-list">
+        <ion-list>
+            <ion-item ng-repeat="item in lostList">
+                <a href="#/schoolNews/single/{{item._id}}">{{item.subject}}</a>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
