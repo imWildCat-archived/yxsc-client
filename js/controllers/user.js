@@ -12,7 +12,6 @@
 
         // 注册 Controller
         .controller(CTRL_PRE + 'Reg', function ($scope, $window, toaster, UserService) {
-
             // 新用户对象， 用于存储用户提交的注册信息
             $scope.newUser = {};
 

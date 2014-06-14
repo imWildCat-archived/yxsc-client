@@ -17,7 +17,8 @@
     angular.module('sdufe-client', ['ionic',
         'app.controllers',
         'app.controllers.User',
-        'app.controllers.SchoolNews'])
+        'app.controllers.SchoolNews',
+        'app.controllers.Topic'])
 
         .run(function ($ionicPlatform) {
             $ionicPlatform.ready(function () {
@@ -157,10 +158,28 @@
             const TOPIC_VIEWS_DIR = VIEWS_DIR + 'topic/';
             $stateProvider
                 .state('topic', {
-                    url: 'topic',
+                    url: '/topic',
                     abstract: true,
                     templateUrl: VIEWS_DIR + 'menu.html',
                     controller: 'AppCtrl'
+                })
+                .state('topic.lost', {
+                    url: '/lost/list',
+                    views: {
+                        menuContent: {
+                            templateUrl: TOPIC_VIEWS_DIR + 'common/list.html',
+                            controller: 'TopicCtrl.Lost.list'
+                        }
+                    }
+                })
+                .state('topic.new', {
+                    url: '/lost/new',
+                    views: {
+                        menuContent: {
+                            templateUrl: TOPIC_VIEWS_DIR + 'common/new.html',
+                            controller: 'TopicCtrl.Lost.new'
+                        }
+                    }
                 })
         })
     ;
