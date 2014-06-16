@@ -1,0 +1,16 @@
+<ion-view title="阅读话题">
+    <ion-content class="has-header schoolnews-list">
+        <div class="card">
+            <div class="item item-text-wrap">
+                <h2> {{ topic.subject }}</h2>
+            </div>
+        </div>
+
+        <div class="list card">
+            <div class="item item-body">
+                <div ng-bind-html="topic.content"></div>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

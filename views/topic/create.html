@@ -1,0 +1,38 @@
+<ion-view title="{{ viewTitle||'无标题(存在错误)' }}">
+    <div class="bar bar-header bar-positive">
+        <h1 class="title">bar-positive</h1>
+    </div>
+
+    <ion-nav-buttons side="right">
+        <button ng-click="newTopicFormSubmit()" class="button button-icon icon ion-ios7-plus-outline"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header lost-list">
+
+        <form name="newTopicForm">
+            <div class="list">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">标题</span>
+                    <input type="text" ng-model="newTopic.subject" placeholder="您想说点儿什么？" required>
+                </label>
+
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        校区
+                    </div>
+                    <select ng-model="newTopic.campus" required>
+                        <option value="1">燕山</option>
+                        <option value="2">舜耕</option>
+                        <option value="3">圣井</option>
+                        <option value="4">明水</option>
+                    </select>
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">内容</span>
+                    <textarea rows="10" ng-model="newTopic.content" placeholder="内容可以不填"></textarea>
+                </label>
+            </div>
+        </form>
+
+    </ion-content>
+</ion-view>

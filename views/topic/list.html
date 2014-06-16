@@ -1,0 +1,15 @@
+<ion-view title="{{ viewTitle||'无标题(存在错误)' }}">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <a href="#/topic/create/lost" class="button button-icon icon ion-compose"></a>
+    </ion-nav-buttons>
+    <ion-content class="has-header">
+        <ion-list class="custom-list">
+            <ion-item ng-repeat="item in list">
+                <a href="#/topic/single/{{item._id}}">{{item.subject}}</a>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

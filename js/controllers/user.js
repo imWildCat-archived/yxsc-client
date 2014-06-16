@@ -25,7 +25,7 @@
                     toaster.pop('success', '注册成功');
                     $window.history.back();
                 });
-                console.log($scope.newUser);
+//                console.log($scope.newUser);
             };
         })
 

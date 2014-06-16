@@ -13,6 +13,7 @@
 // 'starter.controllers' is found in controllers.js
 (function () {
     const VIEWS_DIR = 'views/';
+    const COMMON_VIEWS_DIR = VIEWS_DIR + 'common/no_menu.html';
 
     angular.module('sdufe-client', ['ionic',
         'app.controllers',
@@ -49,6 +50,16 @@
                     views: {
                         'menuContent': {
                             templateUrl: "views/search.html"
+                        }
+                    }
+                })
+
+                .state('app.lost', {
+                    url:'/lost',
+                    views : {
+                        menuContent:{
+                            templateUrl:'views/topic/list.html',
+                            controller : 'TopicCtrl.Lost.list'
                         }
                     }
                 })
@@ -98,16 +109,15 @@
             const USER_VIEWS_DIR = VIEWS_DIR + 'user/';
             $stateProvider
                 .state('user', {
-                    url: "/user",
+                    url: '/user',
                     abstract: true,
-                    templateUrl: VIEWS_DIR + 'menu.html',
-                    controller: 'AppCtrl'
+                    templateUrl: COMMON_VIEWS_DIR
                 })
 
                 .state('user.reg', {
                     url: '/reg',
                     views: {
-                        menuContent: {
+                        content: {
                             templateUrl: USER_VIEWS_DIR + 'reg.html',
                             controller: 'UserCtrl.Reg'
                         }
@@ -117,7 +127,7 @@
                 .state('user.login', {
                     url: '/login',
                     views: {
-                        menuContent: {
+                        content: {
                             templateUrl: USER_VIEWS_DIR + 'login.html',
                             controller: 'UserCtrl.Login'
                         }
@@ -160,28 +170,31 @@
                 .state('topic', {
                     url: '/topic',
                     abstract: true,
-                    templateUrl: VIEWS_DIR + 'menu.html',
-                    controller: 'AppCtrl'
+                    templateUrl: VIEWS_DIR + 'common/no_menu.html'
+//                    controller: 'AppCtrl'
                 })
-                .state('topic.lost', {
-                    url: '/lost/list',
-                    views: {
-                        menuContent: {
-                            templateUrl: TOPIC_VIEWS_DIR + 'common/list.html',
-                            controller: 'TopicCtrl.Lost.list'
+
+                .state('topic.single',{
+                    url:'/single/:id',
+                    views:{
+                        content:{
+                            templateUrl:TOPIC_VIEWS_DIR + 'single.html',
+                            controller:'TopicCtrl.single'
                         }
                     }
                 })
-                .state('topic.new', {
-                    url: '/lost/new',
+
+                .state('topic.createLost', {
+                    url: '/create/lost',
                     views: {
-                        menuContent: {
-                            templateUrl: TOPIC_VIEWS_DIR + 'common/new.html',
-                            controller: 'TopicCtrl.Lost.new'
+                        content: {
+                            templateUrl: TOPIC_VIEWS_DIR + 'create.html',
+                            controller: 'TopicCtrl.Lost.create'
                         }
                     }
                 })
         })
+
     ;
 
 })();

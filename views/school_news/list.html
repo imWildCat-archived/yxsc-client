@@ -2,8 +2,8 @@
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
-    <ion-content class="has-header schoolnews-list">
-        <ion-list>
+    <ion-content class="has-header">
+        <ion-list class="custom-list">
             <ion-item ng-repeat="item in newsList">
                 <a href="#/schoolNews/single/{{item._id}}">{{item.subject}}</a>
             </ion-item>
