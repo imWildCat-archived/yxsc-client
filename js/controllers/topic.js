@@ -23,7 +23,7 @@
         $scope.currentPage = 1;
         $scope.list = [];
 
-        TopicService.getList(type, 1, $scope.currentPage, function (data) {
+        TopicService.getList(type, 1, $scope.currentPage).then(function (data) {
             $scope.list = data;
         });
 
@@ -46,7 +46,7 @@
 
         // 阅读话题
         .controller(CTRL_PRE + 'single', function ($scope, $stateParams, toaster, TopicService) {
-            TopicService.getSingle($stateParams.id, function (data) {
+            TopicService.getSingle($stateParams.id).then(function (data) {
                 $scope.topic = data;
             });
         })
@@ -76,7 +76,7 @@
                     return;
                 }
 
-                TopicService.create($scope.newTopic, function (data) {
+                TopicService.create($scope.newTopic).then(function (data) {
                     toaster.pop('success', '发布成功');
                     $window.history.back();
                 });

@@ -9,16 +9,16 @@
 
     angular.module('app.controllers.SchoolNews', ['app.services.SchoolNews'])
         .controller(CTRL_PRE + 'list', function ($scope, SchoolNewsService) {
-            SchoolNewsService.latest(1, function (data) {
+            SchoolNewsService.latest(1).then(function (data) {
                 $scope.newsList = data;
 //                console.log(data);
             });
         })
         .controller(CTRL_PRE + 'single', function ($scope, $stateParams, SchoolNewsService) {
-            SchoolNewsService.single($stateParams.id, function (data) {
+            SchoolNewsService.single($stateParams.id).then(function (data) {
 //                console.log(data);
                 $scope.news = data;
-            },null)
+            });
         })
     ;
 })();

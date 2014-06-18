@@ -21,7 +21,7 @@
              * 注册按钮点击
              */
             $scope.regFormSubmit = function () {
-                UserService.reg($scope.newUser, function (data) {
+                UserService.reg($scope.newUser).then(function (data) {
                     toaster.pop('success', '注册成功');
 
                     Preferences.saveUser($scope.newUser.username, $scope.newUser.password);
@@ -47,7 +47,7 @@
              * 登录按钮点击
              */
             $scope.loginFormSubmit = function () {
-                UserService.login($scope.loginUser, function (data) {
+                UserService.login($scope.loginUser).then(function (data) {
                     toaster.pop('success', '登录成功');
                     Preferences.saveUser($scope.loginUser.username, $scope.loginUser.password);
                     $window.history.back();
