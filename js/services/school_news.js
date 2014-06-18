@@ -5,15 +5,25 @@
  * @date 2014-06-14
  */
 (function () {
-    angular.module('app.services.SchoolNews', ['app.services.base']).service('SchoolNewsService', ['BaseHttpService', function (BaseHttpService) {
+    angular.module('app.services.SchoolNews', ['app.services.base']).service('SchoolNewsService', ['$q','BaseHttpService', function ($q, BaseHttpService) {
         var SchoolNewsService = {};
 
-        SchoolNewsService.latest = function (page, successCallback) {
-            BaseHttpService.getWithUi('/school_news/latest', {page: page}, successCallback);
+        /**
+         * 获取最新新闻
+         * @param page
+         * @returns {promise|*}
+         */
+        SchoolNewsService.latest = function (page) {
+            return BaseHttpService.getWithUi('/school_news/latest', {page: page});
         };
 
-        SchoolNewsService.single = function (id, successCallback) {
-            BaseHttpService.getWithUi('/school_news/single/' + id, null, successCallback);
+        /**
+         * 获取单条新闻
+         * @param id
+         * @returns {promise|*}
+         */
+        SchoolNewsService.single = function (id) {
+            return BaseHttpService.getWithUi('/school_news/single/' + id, null);
         };
 
         return SchoolNewsService;

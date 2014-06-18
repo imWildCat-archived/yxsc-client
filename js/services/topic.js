@@ -5,17 +5,17 @@
  * @date 2014-06-14
  */
 (function () {
-    angular.module('app.services.Topic', ['app.services.base']).service('TopicService', ['BaseHttpService', function (BaseHttpService) {
+    angular.module('app.services.Topic', ['app.services.base']).service('TopicService', ['$q', 'BaseHttpService', function ($q, BaseHttpService) {
         var TopicService = {};
 
         /**
          * 创建新话题
          * @param newTopic
-         * @param successCallback
+         * @returns {promise|*}
          */
-        TopicService.create = function (newTopic, successCallback) {
+        TopicService.create = function (newTopic) {
             // TODO: 换行没有实现
-            BaseHttpService.postWithUi('/topic/create', newTopic, successCallback);
+            return BaseHttpService.postWithUi('/topic/create', newTopic);
         };
 
         /**
@@ -23,26 +23,24 @@
          * @param type {Number}
          * @param campus {Number}
          * @param page {Number}
+         * @returns {promise|*}
          */
-        TopicService.getList = function (type, campus, page, successCallback, errorCallback) {
-            BaseHttpService.getWithUi('/topic/list'
+        TopicService.getList = function (type, campus, page) {
+            return BaseHttpService.getWithUi('/topic/list'
                 , {
                     type: type,
                     campus: campus,
                     page: page
-                }
-                , successCallback
-                , errorCallback);
+                });
         };
 
         /**
          * 获取单个话题
          * @param id
-         * @param successCallback
-         * @param errorCallback
+         * @returns {promise|*}
          */
-        TopicService.getSingle = function (id, successCallback, errorCallback) {
-            BaseHttpService.getWithUi('/topic/single/' + id,null, successCallback, errorCallback);
+        TopicService.getSingle = function (id ) {
+            return BaseHttpService.getWithUi('/topic/single/' + id, null);
         };
 
         return TopicService;
