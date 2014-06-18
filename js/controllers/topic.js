@@ -18,7 +18,7 @@
      * @param TopicService
      * @private
      */
-    var _initList = function (type, title, $scope, toaster, UserService, TopicService) {
+    var _initList = function (type, title, $scope, $location, toaster, UserService, TopicService) {
         $scope.viewTitle = title;
         $scope.currentPage = 1;
         $scope.list = [];
@@ -26,6 +26,12 @@
         TopicService.getList(type, 1, $scope.currentPage, function (data) {
             $scope.list = data;
         });
+
+        $scope.newTopicButtonClick = function () {
+            if (UserService.checkLogin()) {
+                $location.path('/topic/create/lost');
+            }
+        }
     };
 
     angular.module('app.controllers.Topic', ['toaster', 'app.services.User', 'app.services.Topic'])
@@ -33,14 +39,14 @@
         // 注册 Controller
 
         // 话题列表
-        .controller(CTRL_PRE + 'Lost.list', function ($scope, toaster, UserService, TopicService) {
-            _initList(4,'寻物启事',$scope,toaster,UserService,TopicService);
+        .controller(CTRL_PRE + 'Lost.list', function ($scope, $location, toaster, UserService, TopicService) {
+            _initList(4, '寻物启事', $scope, $location, toaster, UserService, TopicService);
             console.log(UserService.currentUser);
         })
 
         // 阅读话题
-        .controller(CTRL_PRE + 'single', function ($scope,$stateParams, toaster, TopicService) {
-            TopicService.getSingle($stateParams.id,function(data){
+        .controller(CTRL_PRE + 'single', function ($scope, $stateParams, toaster, TopicService) {
+            TopicService.getSingle($stateParams.id, function (data) {
                 $scope.topic = data;
             });
         })
@@ -48,13 +54,13 @@
         // 创建新话题
         .controller(CTRL_PRE + 'Lost.create', function ($scope, $location, $window, toaster, UserService, TopicService) {
             UserService.getCsrf();
-            if(!UserService.currentUser) {
-                toaster.pop('warning','您尚未登录，请登录','要发表话题，必须登录');
+            if (!UserService.currentUser) {
+                toaster.pop('warning', '您尚未登录，请登录', '要发表话题，必须登录');
                 $location.path('/user/login');
             }
 
             $scope.viewTitle = '发布寻物启事';
-            $scope.newTopic = {type: 4};
+            $scope.newTopic = {type: 4, campus: UserService.clientData.currentCampus};
 
             /**
              * 响应表单提交事件
