@@ -15,13 +15,18 @@
     const VIEWS_DIR = 'views/';
     const COMMON_VIEWS_DIR = VIEWS_DIR + 'common/no_menu.html';
 
-    angular.module('sdufe-client', ['ionic',
+    angular.module('sdufe-client', [
+        'ionic',
+        'toaster',
+        'app.utilities.Geolocation',
+        'app.services.User',
         'app.controllers',
         'app.controllers.User',
         'app.controllers.SchoolNews',
-        'app.controllers.Topic'])
+        'app.controllers.Topic'
+    ])
 
-        .run(function ($ionicPlatform) {
+        .run(function ($ionicPlatform, toaster,UserService, Geolocation) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -32,6 +37,17 @@
                     // org.apache.cordova.statusbar required
                     StatusBar.styleDefault();
                 }
+
+                /**
+                 * 初始化当前校区
+                 * @private
+                 */
+                var _initCurrentCampus = function () {
+                    Geolocation.getCampus().then(function (campus) {
+                        UserService.clientData.currentCampus = campus;
+                    });
+                };
+                _initCurrentCampus();
             });
         })
 
@@ -55,21 +71,21 @@
                 })
 
                 .state('app.lost', {
-                    url:'/lost',
-                    views : {
-                        menuContent:{
-                            templateUrl:'views/topic/list.html',
-                            controller : 'TopicCtrl.Lost.list'
+                    url: '/lost',
+                    views: {
+                        menuContent: {
+                            templateUrl: 'views/topic/list.html',
+                            controller: 'TopicCtrl.Lost.list'
                         }
                     }
                 })
-
 
                 .state('app.index', {
                     url: '/index',
                     views: {
                         'menuContent': {
-                            templateUrl: 'views/index.html'
+                            templateUrl: 'views/index.html',
+                            controller: 'TestCtrl'
                         }
                     }
                 })
@@ -174,12 +190,12 @@
 //                    controller: 'AppCtrl'
                 })
 
-                .state('topic.single',{
-                    url:'/single/:id',
-                    views:{
-                        content:{
-                            templateUrl:TOPIC_VIEWS_DIR + 'single.html',
-                            controller:'TopicCtrl.single'
+                .state('topic.single', {
+                    url: '/single/:id',
+                    views: {
+                        content: {
+                            templateUrl: TOPIC_VIEWS_DIR + 'single.html',
+                            controller: 'TopicCtrl.single'
                         }
                     }
                 })
