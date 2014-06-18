@@ -7,8 +7,8 @@
 
 (function () {
     angular.module('app.services.base', ['ionic', 'toaster', 'app.config'])
-        .service('BaseHttpService', ['$q','$http', '$location', '$ionicLoading', 'toaster', 'appConf', 'errorMessages'
-            , function ($q,$http, $location, $ionicLoading, toaster, appConf, errorMessages) {
+        .service('BaseHttpService', ['$q', '$http', '$location', '$ionicLoading', 'toaster', 'appConf', 'errorMessages'
+            , function ($q, $http, $location, $ionicLoading, toaster, appConf, errorMessages) {
                 var BaseHttpService = {
                     _csrf: ''
                 };
@@ -104,7 +104,7 @@
                 BaseHttpService.getWithUi = function (uri, params) {
                     var deferred = $q.defer();
                     uiLoading.show();
-                    this.get(uri, params, function (res) {
+                    this.get(uri, params).then(function (res) {
                         uiLoading.hide();
                         // 请求成功， 但是需求判断status， 判定操作是否成功
                         if (res.status === 1) {
@@ -131,7 +131,7 @@
                 BaseHttpService.postWithUi = function (uri, params) {
                     var deferred = $q.defer();
                     uiLoading.show();
-                    this.post(uri, params, function (res) {
+                    this.post(uri, params).then(function (res) {
                         uiLoading.hide();
                         // 请求成功， 但是需求判断status， 判定操作是否成功
                         if (res.status === 1) {
