@@ -35,7 +35,7 @@
          * @param password
          * @returns {*}
          */
-        Preferences.saveLoginInfo = function (username, password) {
+        Preferences.saveUser = function (username, password) {
             return Preferences.set('saved_user', {
                 username: username,
                 password: password
@@ -46,8 +46,13 @@
          * 获取用户登录信息
          * @returns {*}
          */
-        Preferences.getLoginInfo = function () {
-            return Preferences.get('saved_user');
+        Preferences.getUser = function () {
+            var savedUser = Preferences.get('saved_user');
+            if(savedUser && savedUser.username && savedUser.password){
+                return savedUser;
+            } else {
+                return null;
+            }
         };
 
         return Preferences;
