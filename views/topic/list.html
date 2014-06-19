@@ -1,6 +1,6 @@
 <ion-view title="{{ viewTitle||'无标题(存在错误)' }}">
     <ion-nav-buttons side="left">
-        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
         <a ng-click="newTopicButtonClick()" class="button button-icon icon ion-compose"></a>
@@ -12,4 +12,10 @@
             </ion-item>
         </ion-list>
     </ion-content>
+
+    <div class="bar bar-footer bar-stable">
+        <button ng-click="pageDown()" class="button button-clear button-icon icon ion-chevron-left"></button>
+        <div class="title"><button class="button button-clear" ng-click="chooseCampusButtonClick()">{{ campusName }}</button></div>
+        <button ng-click="pageUp()" class="button button-clear button-icon icon ion-chevron-right"></button>
+    </div>
 </ion-view>
