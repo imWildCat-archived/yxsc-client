@@ -10,12 +10,24 @@
             <ion-item ng-repeat="item in list">
                 <a href="#/topic/single/{{item._id}}">{{item.subject}}</a>
             </ion-item>
+
+            <!--BUG： 如果不加这两个空item，最后一个主题会在footer下面-->
+            <ion-item>
+                <a></a>
+            </ion-item>
+            <ion-item>
+                <a></a>
+            </ion-item>
+
         </ion-list>
     </ion-content>
 
-    <div class="bar bar-footer bar-stable">
-        <button ng-click="pageDown()" class="button button-clear button-icon icon ion-chevron-left"></button>
-        <div class="title"><button class="button button-clear" ng-click="chooseCampusButtonClick()">{{ campusName }}</button></div>
-        <button ng-click="pageUp()" class="button button-clear button-icon icon ion-chevron-right"></button>
-    </div>
 </ion-view>
+
+<div class="bar bar-footer bar-stable">
+    <button ng-click="pageDown()" class="button button-clear button-icon icon ion-chevron-left"></button>
+    <div class="title">
+        <button class="button button-clear" ng-click="chooseCampusButtonClick()">{{ campusName }}</button>
+    </div>
+    <button ng-click="pageUp()" class="button button-clear button-icon icon ion-chevron-right"></button>
+</div>
