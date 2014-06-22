@@ -1,4 +1,7 @@
 <ion-view title="阅读话题">
+    <ion-nav-buttons side="right">
+        <a ng-click="newTopicButtonClick()" class="button button-icon icon ion-chatbubble-working" href="#/topic/create/reply/{{ topic._id }}"></a>
+    </ion-nav-buttons>
     <ion-content class="has-header schoolnews-list">
         <div class="card">
             <div class="item item-text-wrap">
