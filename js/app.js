@@ -71,11 +71,11 @@
                 })
 
                 .state('app.lost', {
-                    url: '/lost',
+                    url: '/topic_list/:type',
                     views: {
                         menuContent: {
                             templateUrl: 'views/topic/list.html',
-                            controller: 'TopicCtrl.Lost.list'
+                            controller: 'TopicCtrl.list'
                         }
                     }
                 })
@@ -201,11 +201,11 @@
                 })
 
                 .state('topic.createLost', {
-                    url: '/create/lost',
+                    url: '/create/:type',
                     views: {
                         content: {
                             templateUrl: TOPIC_VIEWS_DIR + 'create.html',
-                            controller: 'TopicCtrl.Lost.create'
+                            controller: 'TopicCtrl.create'
                         }
                     }
                 })

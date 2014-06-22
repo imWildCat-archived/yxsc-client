@@ -6,18 +6,18 @@
         <a ng-click="newTopicButtonClick()" class="button button-icon icon ion-compose"></a>
     </ion-nav-buttons>
     <ion-content class="has-header">
-        <ion-list class="custom-list">
+        <ion-list class="custom-list" style="padding-bottom: 40px;">
             <ion-item ng-repeat="item in list">
                 <a href="#/topic/single/{{item._id}}">{{item.subject}}</a>
             </ion-item>
 
             <!--BUG： 如果不加这两个空item，最后一个主题会在footer下面-->
-            <ion-item>
-                <a></a>
-            </ion-item>
-            <ion-item>
-                <a></a>
-            </ion-item>
+            <!--<ion-item>-->
+                <!--<a></a>-->
+            <!--</ion-item>-->
+            <!--<ion-item>-->
+                <!--<a></a>-->
+            <!--</ion-item>-->
 
         </ion-list>
     </ion-content>

@@ -8,6 +8,13 @@
 (function () {
     const CTRL_PRE = 'TopicCtrl.';
 
+    var typeOptions = {
+        2: ['社团招募'],
+        3: ['学长帮帮忙'],
+        4: ['寻物启事'],
+        5: ['失物招领']
+    };
+
     /**
      * 初始化话题列表 (抽象层)
      * @param type {number} 话题类型
@@ -30,7 +37,7 @@
         $scope.lastPage = null;
         $scope.lastCampus = null;
 
-        _loadList = function () {
+        var _loadList = function () {
             TopicService.getList(type, $scope.campus, $scope.page).then(function (data) {
                 $scope.list = data;
                 _setCampusName();
@@ -42,13 +49,14 @@
                 if ($scope.lastPage) {
                     $scope.page = $scope.lastPage;
                 }
+                _setCampusName();
             });
         };
 
 
         $scope.newTopicButtonClick = function () {
             if (UserService.checkLogin()) {
-                $location.path('/topic/create/lost');
+                $location.path('/topic/create/' + type);
             }
         };
 
@@ -124,12 +132,17 @@
         // 注册 Controller
 
         // 话题列表
-        .controller(CTRL_PRE + 'Lost.list', function ($scope, $location, $ionicActionSheet, toaster, UserService, TopicService) {
-            _initList(4, '寻物启事', $scope, $location, $ionicActionSheet, toaster, UserService, TopicService);
+        .controller(CTRL_PRE + 'list', function ($scope, $location, $stateParams, $ionicActionSheet, toaster, UserService, TopicService) {
+            var _type = $stateParams.type;
+            if (!_type) {
+                toaster.pop('error', '错误', '初始化发表新话题界面时出错');
+            }
+
+            _initList(_type, typeOptions[_type][0], $scope, $location, $ionicActionSheet, toaster, UserService, TopicService);
         })
 
         // 阅读话题
-        .controller(CTRL_PRE + 'single', function ($scope,$location, $stateParams, toaster, UserService, TopicService) {
+        .controller(CTRL_PRE + 'single', function ($scope, $location, $stateParams, toaster, UserService, TopicService) {
             TopicService.getSingle($stateParams.id).then(function (data) {
                 $scope.topic = data.topic;
                 $scope.replies = data.replies;
@@ -147,15 +160,21 @@
         })
 
         // 创建新话题
-        .controller(CTRL_PRE + 'Lost.create', function ($scope, $location, $window, toaster, UserService, TopicService) {
+        .controller(CTRL_PRE + 'create', function ($scope, $location, $stateParams, $window, toaster, UserService, TopicService) {
+            var _type = $stateParams.type;
+            if (!_type) {
+                toaster.pop('error', '错误', '初始化发表新话题界面时出错');
+            }
+
             UserService.getCsrf();
             if (!UserService.currentUser) {
                 toaster.pop('warning', '您尚未登录，请登录', '要发表话题，必须登录');
                 $location.path('/user/login');
             }
 
-            $scope.viewTitle = '发布寻物启事';
-            $scope.newTopic = {type: 4, campus: UserService.clientData.currentCampus};
+
+            $scope.viewTitle = '发布' + typeOptions[_type][0];
+            $scope.newTopic = {type: _type, campus: UserService.clientData.currentCampus};
 
             /**
              * 响应表单提交事件
