@@ -209,6 +209,16 @@
                         }
                     }
                 })
+
+                .state('topic.reply', {
+                    url: '/create/reply/:id',
+                    views:{
+                        content:{
+                            templateUrl : TOPIC_VIEWS_DIR + 'reply.html',
+                            controller:'TopicCtrl.reply'
+                        }
+                    }
+                })
         })
 
     ;

@@ -1,6 +1,6 @@
 <ion-view title="阅读话题">
     <ion-nav-buttons side="right">
-        <a ng-click="newTopicButtonClick()" class="button button-icon icon ion-chatbubble-working" href="#/topic/create/reply/{{ topic._id }}"></a>
+        <a ng-click="newReplyButtonClick()" class="button button-icon icon ion-chatbubble-working"></a>
     </ion-nav-buttons>
     <ion-content class="has-header schoolnews-list">
         <div class="card">
@@ -9,12 +9,64 @@
             </div>
         </div>
 
+
+
         <div class="list card">
-            <div class="item item-body">
-                <b>作者： {{topic.author.username}}</b>
-                <div ng-bind-html="topic.content"></div>
+            <div class="item item-avatar">
+                <img src="img/no_avatar.png">
+
+                <h2>{{ topic.author.username }}</h2>
+
+                <p>{{ topic.date | date:'yyyy-MM-dd HH:mm:ss' }} <span style="float:right">楼主</span></p>
             </div>
 
+            <div class="item item-body">
+
+                {{ topic.content }}
+
+            </div>
         </div>
+
+        <hr />
+
+        <ion-list class="custom-list">
+            <div ng-repeat="reply in replies">
+
+                <div class="list card">
+                    <div class="item item-avatar">
+                        <img src="img/no_avatar.png">
+
+                        <h2>{{ reply.author.username }}</h2>
+
+                        <p>{{ reply.date | date:'yyyy-MM-dd HH:mm:ss' }} <span style="float:right">#{{ reply.position }}</span></p>
+                    </div>
+
+                    <div class="item item-body">
+
+                        {{ reply.content }}
+
+                    </div>
+
+                    <!--<div class="item tabs tabs-secondary tabs-icon-left">-->
+                        <!--<a class="tab-item" href="#">-->
+                            <!--<i class="icon ion-thumbsup"></i>-->
+                            <!--Like-->
+                        <!--</a>-->
+                        <!--<a class="tab-item" href="#">-->
+                            <!--<i class="icon ion-chatbox"></i>-->
+                            <!--Comment-->
+                        <!--</a>-->
+                        <!--<a class="tab-item" href="#">-->
+                            <!--<i class="icon ion-share"></i>-->
+                            <!--Share-->
+                        <!--</a>-->
+                    <!--</div>-->
+
+                </div>
+
+            </div>
+        </ion-list>
+
+
     </ion-content>
 </ion-view>

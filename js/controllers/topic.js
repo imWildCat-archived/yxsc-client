@@ -101,11 +101,11 @@
         };
 
         $scope.pageDown = function () {
-            if($scope.page - 1> 0){
+            if ($scope.page - 1 > 0) {
                 $scope.page--;
                 _loadList();
             } else {
-                toaster.pop('info','已经是第一页','没有上一页啦');
+                toaster.pop('info', '已经是第一页', '没有上一页啦');
             }
         };
 
@@ -129,10 +129,21 @@
         })
 
         // 阅读话题
-        .controller(CTRL_PRE + 'single', function ($scope, $stateParams, toaster, TopicService) {
+        .controller(CTRL_PRE + 'single', function ($scope,$location, $stateParams, toaster, UserService, TopicService) {
             TopicService.getSingle($stateParams.id).then(function (data) {
-                $scope.topic = data;
+                $scope.topic = data.topic;
+                $scope.replies = data.replies;
             });
+
+            $scope.newReplyButtonClick = function () {
+                if (!UserService.checkLogin()) return;
+                if (!$scope.topic._id) {
+                    toaster.pop('warning', '出错啦', '未知错误，您不能发表回复');
+                    return;
+                }
+
+                $location.path('/topic/create/reply/' + $scope.topic._id);
+            }
         })
 
         // 创建新话题
@@ -167,6 +178,28 @@
 
                 console.log($scope.newTopic);
             }
+        })
+
+        .controller(CTRL_PRE + 'reply', function ($scope, $stateParams, $location, $window, toaster, UserService, TopicService) {
+            UserService.getCsrf();
+
+            $scope.newReply = {
+                id: $stateParams.id
+            };
+
+            $scope.newReplyFormSubmit = function () {
+                if (!$scope.newReply.content) {
+                    return toaster.pop('info', '抱歉，不能发表回复', '请填写回复的内容');
+                }
+
+                TopicService.reply($scope.newReply).then(function (ret) {
+                    console.log(ret);
+                    toaster.pop('success', '回复成功');
+                    $window.history.back();
+                }, function (error) {
+                    toaster.pop('error', '回复失败');
+                });
+            };
         })
 
     ;

@@ -39,8 +39,18 @@
          * @param id
          * @returns {promise|*}
          */
-        TopicService.getSingle = function (id ) {
+        TopicService.getSingle = function (id) {
             return BaseHttpService.getWithUi('/topic/single/' + id, null);
+        };
+
+        /**
+         * 回复话题
+         * @param id
+         * @param newReply
+         * @returns {promise|*}
+         */
+        TopicService.reply = function (newReply) {
+            return BaseHttpService.postWithUi('/topic/reply', newReply);
         };
 
         return TopicService;
