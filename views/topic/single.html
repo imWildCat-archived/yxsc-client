@@ -13,7 +13,7 @@
 
         <div class="list card">
             <div class="item item-avatar">
-                <img src="img/no_avatar.png">
+                <img src="{{ topic.author.avatar || 'img/no_avatar.png' }}">
 
                 <h2>{{ topic.author.username }}</h2>
 
@@ -34,7 +34,7 @@
 
                 <div class="list card">
                     <div class="item item-avatar">
-                        <img src="img/no_avatar.png">
+                        <img src="{{ reply.author.avatar || 'img/no_avatar.png' }}">
 
                         <h2>{{ reply.author.username }}</h2>
 

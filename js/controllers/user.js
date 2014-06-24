@@ -8,7 +8,7 @@
 (function () {
     const CTRL_PRE = 'UserCtrl.';
 
-    angular.module('app.controllers.User', ['toaster', 'app.utilities.Preferences', 'app.services.User'])
+    angular.module('app.controllers.User', ['toaster', 'app.utilities.Preferences', 'app.services.User', 'app.services.Image'])
 
         // 注册 Controller
         .controller(CTRL_PRE + 'Reg', function ($scope, $window, toaster, Preferences, UserService) {
@@ -53,6 +53,29 @@
                     $window.history.back();
                 });
             }
+        })
+
+        // 编辑用户资料
+        .controller(CTRL_PRE + 'Edit', function ($scope, $window, toaster, Preferences, UserService, ImageService) {
+            UserService.checkLogin();
+
+            $scope.user = UserService.currentUser;
+            $scope.form = {};
+
+            ImageService.getToken();
+
+            ImageService.initImageService($scope, function (data) {
+                $scope.user.avatar = data.t_url;
+                UserService.changeProfile($scope.user).then(function () {
+                    toaster.pop('success', '用户资料修改成功');
+                }, function () {
+                    toaster.pop('error', '用户资料修改失败');
+                })
+            }, function () {
+                toaster.pop('error', '头像上传失败');
+            });
+
+
         })
     ;
 })();

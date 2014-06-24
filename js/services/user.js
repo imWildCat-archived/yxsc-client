@@ -55,11 +55,10 @@
         /**
          * 用户登录
          * @param loginUser {Object}
-         * @returns {Deferred}
+         * @returns {promise|*}
          */
         UserService.login = function (loginUser) {
             var deferred = $q.defer();
-            console.log(deferred);
             BaseHttpService.postWithUi('/user/login', loginUser).then(function (data) {
                 UserService.currentUser = data;
                 deferred.resolve(data);
@@ -69,8 +68,28 @@
             return deferred.promise;
         };
 
+        /**
+         * 用户登出(未实现)
+         * @returns {promise|*}
+         */
         UserService.logout = function () {
             var deferred = $q.defer();
+            return deferred.promise;
+        };
+
+        /**
+         * 修改用户资料
+         * @param userProfile
+         * @returns {promise|*}
+         */
+        UserService.changeProfile = function (userProfile) {
+            var deferred = $q.defer();
+            BaseHttpService.postWithUi('/user/update_profile', {user: userProfile}).then(function (ret) {
+                UserService.currentUser = ret;
+                deferred.resolve(ret);
+            }, function (error) {
+                deferred.reject(error);
+            });
             return deferred.promise;
         };
 

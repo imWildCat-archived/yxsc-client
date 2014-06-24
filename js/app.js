@@ -26,7 +26,7 @@
         'app.controllers.Topic'
     ])
 
-        .run(function ($ionicPlatform, toaster,UserService, Geolocation) {
+        .run(function ($ionicPlatform, toaster, UserService, Geolocation) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
@@ -61,14 +61,6 @@
                     controller: 'AppCtrl'
                 })
 
-                .state('app.search', {
-                    url: "/search",
-                    views: {
-                        'menuContent': {
-                            templateUrl: "views/search.html"
-                        }
-                    }
-                })
 
                 .state('app.lost', {
                     url: '/topic_list/:type',
@@ -90,33 +82,7 @@
                     }
                 })
 
-                .state('app.browse', {
-                    url: "/browse",
-                    views: {
-                        'menuContent': {
-                            templateUrl: "views/browse.html"
-                        }
-                    }
-                })
-                .state('app.playlists', {
-                    url: "/playlists",
-                    views: {
-                        'menuContent': {
-                            templateUrl: "views/playlists.html",
-                            controller: 'PlaylistsCtrl'
-                        }
-                    }
-                })
-
-                .state('app.single', {
-                    url: "/playlists/:playlistId",
-                    views: {
-                        'menuContent': {
-                            templateUrl: "views/playlist.html",
-                            controller: 'PlaylistCtrl'
-                        }
-                    }
-                });
+            ;
             // if none of the above states are matched, use this as the fallback
             $urlRouterProvider.otherwise('/app/index');
         })
@@ -146,6 +112,16 @@
                         content: {
                             templateUrl: USER_VIEWS_DIR + 'login.html',
                             controller: 'UserCtrl.Login'
+                        }
+                    }
+                })
+
+                .state('user.edit', {
+                    url: '/edit',
+                    views: {
+                        content: {
+                            templateUrl: USER_VIEWS_DIR + 'edit.html',
+                            controller: 'UserCtrl.Edit'
                         }
                     }
                 })
@@ -212,10 +188,10 @@
 
                 .state('topic.reply', {
                     url: '/create/reply/:id',
-                    views:{
-                        content:{
-                            templateUrl : TOPIC_VIEWS_DIR + 'reply.html',
-                            controller:'TopicCtrl.reply'
+                    views: {
+                        content: {
+                            templateUrl: TOPIC_VIEWS_DIR + 'reply.html',
+                            controller: 'TopicCtrl.reply'
                         }
                     }
                 })

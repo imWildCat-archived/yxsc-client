@@ -1,0 +1,23 @@
+<ion-view title="修改资料">
+    <ion-nav-buttons side="left">
+        <!--<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>-->
+    </ion-nav-buttons>
+    <ion-content class="has-header schoolnews-list">
+
+        <div class="list card">
+
+            <div class="item item-avatar">
+                <img src="{{ user.avatar || 'img/no_avatar.png' }}">
+
+                <h2>{{ user.username }}</h2>
+
+                <p>注册日期: {{ user.regDate | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                <p>财富:{{ user.money }}</p>
+                <p>test</p>
+            </div>
+        </div>
+
+<b>修改头像:</b>
+        <input type="file" ng-file-select="onFileSelect($files)">
+    </ion-content>
+</ion-view>
