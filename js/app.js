@@ -157,6 +157,15 @@
                         }
                     }
                 })
+                .state('user.change_password', {
+                    url: '/change_password',
+                    views: {
+                        content: {
+                            templateUrl: USER_VIEWS_DIR + 'change_password.html',
+                            controller: 'UserCtrl.ChangePassword'
+                        }
+                    }
+                })
         })
 
         .config(function ($stateProvider) {

@@ -93,6 +93,18 @@
             return deferred.promise;
         };
 
+        /**
+         * 修改密码
+         * @param newPassword
+         * @returns {promise|*}
+         */
+        UserService.changePassword = function (currentPassword, newPassword) {
+            return BaseHttpService.postWithUi('/user/change_password', {
+                currentPassword: currentPassword,
+                newPassword: newPassword
+            });
+        };
+
         return UserService;
     }]);
 

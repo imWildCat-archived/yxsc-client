@@ -79,5 +79,32 @@
 
 
         })
+
+        // 修改密码
+        .controller(CTRL_PRE + 'ChangePassword', function ($scope, $window, toaster, Preferences, UserService) {
+            UserService.checkLogin();
+
+            $scope.user = UserService.currentUser;
+            $scope.formModel = {};
+
+            $scope.changePasswordFormSubmit = function () {
+                if(!($scope.formModel.newPassword && $scope.formModel.currentPassword)){
+                    toaster.pop('warning', '请输入密码');
+                    return;
+                }
+                if ($scope.formModel.newPassword != $scope.formModel.newPasswordRepeat) {
+                    toaster.pop('warning', '两遍密码不一致');
+                    return;
+                }
+
+                UserService.changePassword($scope.formModel.currentPassword, $scope.formModel.newPassword).then(function () {
+                    Preferences.saveUser(UserService.currentUser.username, $scope.formModel.newPassword);
+                    toaster.pop('success', '密码修改成功');
+                    $window.history.back();
+                }, function () {
+                    toaster.pop('warning', '密码修改失败');
+                })
+            };
+        })
     ;
 })();
