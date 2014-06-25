@@ -102,7 +102,7 @@
                     toaster.pop('success', '密码修改成功');
                     $window.history.back();
                 }, function () {
-                    toaster.pop('warning', '密码修改失败');
+//                    toaster.pop('warning', '密码修改失败');
                 })
             };
         })
