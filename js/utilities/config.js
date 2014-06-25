@@ -9,7 +9,7 @@
     angular.module('app.config', []).constant('appConf',
         {
             baseUrl: 'http://localhost:18080/api/v1',
-//            baseUrl: 'http://yinxiangshancai.duapp.com/api/v1',
+//            baseUrl: 'https://yinxiangshancai.duapp.com/api/v1',
             httpTimeout:30
         })
 //        .constant('CONF_BASE_URL','http://localhost:18080/api/vi')

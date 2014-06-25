@@ -12,6 +12,10 @@
 
 //自定义list
 .custom-list {
+  // 修复list显示不全的问题
+  .list:last-child {
+    margin-bottom: 20px;
+  }
   .item {
     white-space: normal;
     a {
@@ -26,9 +30,20 @@
 
   // 修复 footer 覆盖item的问题
   ion-item:last-child {
-    margin-bottom: 44px;
+    margin-bottom: 23px;
   }
 }
+
+.filebox{width:120px;overflow:hidden;position:relative;
+  input[type=file]{position:absolute;left:0;top:0;z-index:2;opacity:0;}/*透明，绝对定位*/
+//  span{display:block;width:60px;line-height:28px;float:left;}/*模拟按钮*/
+}
+
+.content-img{
+  width:99%
+}
+
+
 
 // footer title
 .bar.bar-footer .title {

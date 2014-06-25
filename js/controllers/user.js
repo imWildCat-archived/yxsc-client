@@ -73,6 +73,8 @@
                 })
             }, function () {
                 toaster.pop('error', '头像上传失败');
+                // 尝试再次获取一次token是否能解决上传失败问题
+                ImageService.getToken();
             });
 
 

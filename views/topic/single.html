@@ -20,9 +20,7 @@
                 <p>{{ topic.date | date:'yyyy-MM-dd HH:mm:ss' }} <span style="float:right">楼主</span></p>
             </div>
 
-            <div class="item item-body">
-
-                {{ topic.content }}
+            <div ng-bind-html="topic.content | newlines | miniMarkdown" class="item item-body">
 
             </div>
         </div>
@@ -41,9 +39,7 @@
                         <p>{{ reply.date | date:'yyyy-MM-dd HH:mm:ss' }} <span style="float:right">#{{ reply.position }}</span></p>
                     </div>
 
-                    <div class="item item-body">
-
-                        {{ reply.content }}
+                    <div ng-bind-html="reply.content | newlines | miniMarkdown" class="item item-body">
 
                     </div>
 

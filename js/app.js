@@ -26,6 +26,38 @@
         'app.controllers.Topic'
     ])
 
+        .filter('newlines', function () {
+            return function (text) {
+                if (text)
+                    return text.replace(/\n/g, '<br />');
+                else return text;
+            }
+        })
+
+        .filter('miniMarkdown', function () {
+            return function (text) {
+                if (text) {
+                    // 处理图片
+                    return text.replace(/!\[img\]\((http:\/\/i[0-9]\.tietuku\.com\/\w+\.jpg)\)/gi, '<img class="content-img" src="$1" />');
+                } else {
+                    return text;
+                }
+            }
+        })
+//        .filter('safeHTML', function () {
+//            return function(text) {
+//                return text.replace(/\n/g, '<br/>');
+//            }
+//        })
+//        .filter('noHTML', function () {
+//            return function(text) {
+//                return text
+//                    .replace(/&/g, '&amp;')
+//                    .replace(/>/g, '&gt;')
+//                    .replace(/</g, '&lt;');
+//            }
+//        })
+
         .run(function ($ionicPlatform, toaster, UserService, Geolocation) {
             $ionicPlatform.ready(function () {
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

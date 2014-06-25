@@ -13,6 +13,14 @@
                 <label class="item item-input">
                     <textarea ng-model="newReply.content" placeholder="请填写回复的内容" rows="12"></textarea>
                 </label>
+
+                <label class="item item-input item-stacked-label">
+                    <!--<span class="input-label">上传图片</span>-->
+                    <div class="filebox">
+                        <button class="button button-icon icon ion-image"></button>
+                        <input type="file" ng-file-select="onFileSelect($files)">
+                    </div>
+                </label>
             </div>
         </form>
 

@@ -127,7 +127,7 @@
         _loadList();
     };
 
-    angular.module('app.controllers.Topic', ['ionic', 'toaster', 'app.services.User', 'app.services.Topic'])
+    angular.module('app.controllers.Topic', ['ionic', 'toaster', 'app.services.User', 'app.services.Topic', 'app.services.Image'])
 
         // 注册 Controller
 
@@ -160,7 +160,7 @@
         })
 
         // 创建新话题
-        .controller(CTRL_PRE + 'create', function ($scope, $location, $stateParams, $window, toaster, UserService, TopicService) {
+        .controller(CTRL_PRE + 'create', function ($scope, $location, $stateParams, $window, toaster, UserService, TopicService, ImageService) {
             var _type = $stateParams.type;
             if (!_type) {
                 toaster.pop('error', '错误', '初始化发表新话题界面时出错');
@@ -175,6 +175,21 @@
 
             $scope.viewTitle = '发布' + typeOptions[_type][0];
             $scope.newTopic = {type: _type, campus: UserService.clientData.currentCampus};
+
+
+            // 初始化图片上传服务
+            ImageService.getToken();
+            ImageService.initImageService($scope, function (data) {
+                if($scope.newTopic.content){
+                    $scope.newTopic.content += '\n ![img]('+ data.t_url + ')';
+                } else {
+                    $scope.newTopic.content = '![img]('+ data.t_url + ')';
+                }
+                toaster.pop('info', '图片上传成功');
+            }, function () {
+                toaster.pop('error', '图片上传失败');
+            });
+
 
             /**
              * 响应表单提交事件
@@ -199,12 +214,25 @@
             }
         })
 
-        .controller(CTRL_PRE + 'reply', function ($scope, $stateParams, $location, $window, toaster, UserService, TopicService) {
+        .controller(CTRL_PRE + 'reply', function ($scope, $stateParams, $location, $window, toaster, UserService, TopicService, ImageService) {
             UserService.getCsrf();
 
             $scope.newReply = {
                 id: $stateParams.id
             };
+
+            // 初始化图片上传服务
+            ImageService.getToken();
+            ImageService.initImageService($scope, function (data) {
+                if($scope.newReply.content){
+                    $scope.newReply.content += '\n ![img]('+ data.t_url + ')';
+                } else {
+                    $scope.newReply.content = '![img]('+ data.t_url + ')';
+                }
+                toaster.pop('info', '图片上传成功');
+            }, function () {
+                toaster.pop('error', '图片上传失败');
+            });
 
             $scope.newReplyFormSubmit = function () {
                 if (!$scope.newReply.content) {
