@@ -26,21 +26,63 @@
         'app.controllers.Topic'
     ])
 
-        .filter('newlines', function () {
-            return function (text) {
-                if (text)
-                    return text.replace(/\n/g, '<br />');
-                else return text;
-            }
-        })
+//        // 实现换行功能
+//        .filter('newlines', function () {
+//            return function (text) {
+//                if (text)
+//                    return text.replace(/\n/g, '<br />');
+//                else return text;
+//            }
+//        })
 
+        // 自定义markdown， 实现如图片显示的功能
         .filter('miniMarkdown', function () {
             return function (text) {
                 if (text) {
+                    // 集成换行
+                    text = text.replace(/\n/g, '<br />');
                     // 处理图片
                     return text.replace(/!\[img\]\((http:\/\/i[0-9]\.tietuku\.com\/\w+\.jpg)\)/gi, '<img class="content-img" src="$1" />');
                 } else {
                     return text;
+                }
+            }
+        })
+
+        // 头像uri filter
+        .filter('avatarUri', function () {
+            return function (text) {
+                if (text)
+                    return text;
+                else return 'img/no_avatar.png';
+            }
+        })
+
+        .filter('campusName', function () {
+            return function (text) {
+                text = parseInt(text);
+                switch (text) {
+                    case 1:
+                        return '燕山';
+                    case 2:
+                        return '舜耕';
+                    case 3:
+                        return '圣井';
+                    case 4:
+                        return '明水';
+                    default :
+                        return '未知校区';
+                }
+            }
+        })
+
+        .filter('genderName', function () {
+            return function (text) {
+                console.log('gender:'+text);
+                if (text) {
+                    return '学长';
+                } else {
+                    return '学妹';
                 }
             }
         })
@@ -157,12 +199,23 @@
                         }
                     }
                 })
+
                 .state('user.change_password', {
                     url: '/change_password',
                     views: {
                         content: {
                             templateUrl: USER_VIEWS_DIR + 'change_password.html',
                             controller: 'UserCtrl.ChangePassword'
+                        }
+                    }
+                })
+
+                .state('user.info', {
+                    url: '/info/:id',
+                    views: {
+                        content: {
+                            templateUrl: USER_VIEWS_DIR + 'info.html',
+                            controller: 'UserCtrl.Info'
                         }
                     }
                 })

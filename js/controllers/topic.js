@@ -12,7 +12,8 @@
         2: ['社团招募'],
         3: ['学长帮帮忙'],
         4: ['寻物启事'],
-        5: ['失物招领']
+        5: ['失物招领'],
+        6: ['二手交易']
     };
 
     /**
@@ -244,7 +245,7 @@
                     toaster.pop('success', '回复成功');
                     $window.history.back();
                 }, function (error) {
-                    toaster.pop('error', '回复失败');
+//                    toaster.pop('error', '回复失败');
                 });
             };
         })

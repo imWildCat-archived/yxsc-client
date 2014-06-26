@@ -105,6 +105,32 @@
             });
         };
 
+        /**
+         * 获取用户信息
+         * @param userId
+         */
+        UserService.getInfo = function (userId) {
+            return BaseHttpService.getWithUi('/user/' + userId + '/info', null);
+        };
+
+        /**
+         * 获取用户话题
+         * @param userId
+         * @returns {promise|*}
+         */
+        UserService.getTopics = function (userId) {
+            return BaseHttpService.getWithUi('/user/' + userId + '/topics', null);
+        };
+
+        /**
+         * 获取用户回复
+         * @param userId
+         * @returns {promise|*}
+         */
+        UserService.getReplies = function (userId) {
+            return BaseHttpService.getWithUi('/user/' + userId + '/replies', null);
+        };
+
         return UserService;
     }]);
 

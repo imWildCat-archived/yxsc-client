@@ -13,14 +13,14 @@
 
         <div class="list card">
             <div class="item item-avatar">
-                <img src="{{ topic.author.avatar || 'img/no_avatar.png' }}">
+                <img src="{{ topic.author.avatar | avatarUri }}">
 
                 <h2>{{ topic.author.username }}</h2>
 
                 <p>{{ topic.date | date:'yyyy-MM-dd HH:mm:ss' }} <span style="float:right">楼主</span></p>
             </div>
 
-            <div ng-bind-html="topic.content | newlines | miniMarkdown" class="item item-body">
+            <div ng-bind-html="topic.content | miniMarkdown" class="item item-body">
 
             </div>
         </div>
@@ -32,14 +32,14 @@
 
                 <div class="list card">
                     <div class="item item-avatar">
-                        <img src="{{ reply.author.avatar || 'img/no_avatar.png' }}">
+                        <img src="{{ reply.author.avatar | avatarUri }}">
 
                         <h2>{{ reply.author.username }}</h2>
 
                         <p>{{ reply.date | date:'yyyy-MM-dd HH:mm:ss' }} <span style="float:right">#{{ reply.position }}</span></p>
                     </div>
 
-                    <div ng-bind-html="reply.content | newlines | miniMarkdown" class="item item-body">
+                    <div ng-bind-html="reply.content | miniMarkdown" class="item item-body">
 
                     </div>
 

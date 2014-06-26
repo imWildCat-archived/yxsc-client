@@ -88,7 +88,7 @@
             $scope.formModel = {};
 
             $scope.changePasswordFormSubmit = function () {
-                if(!($scope.formModel.newPassword && $scope.formModel.currentPassword)){
+                if (!($scope.formModel.newPassword && $scope.formModel.currentPassword)) {
                     toaster.pop('warning', '请输入密码');
                     return;
                 }
@@ -105,6 +105,21 @@
 //                    toaster.pop('warning', '密码修改失败');
                 })
             };
+        })
+
+        .controller(CTRL_PRE + 'Info', function ($scope, $window, $location, $stateParams, toaster, Preferences, UserService) {
+            var userId = $stateParams['id'];
+
+            UserService.getInfo(userId).then(function (data) {
+                $scope.user = data.user || null;
+                $scope.topics = data.topics;
+                $scope.replies = data.replies;
+                if (UserService.currentUser) {
+                    $scope.isCurrentUser = ($scope.user.username === UserService.currentUser.username);
+                } else {
+                    $scope.isCurrentUser = false;
+                }
+            });
         })
     ;
 })();

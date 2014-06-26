@@ -1,0 +1,20 @@
+<ion-view title="用户信息">
+    <ion-content class="has-header">
+
+        <div class="list card">
+
+            <div class="item item-avatar">
+                <img src="{{ user.avatar || 'img/no_avatar.png' }}">
+
+                <h2>{{ user.username }}</h2>
+                <p>{{ user.campus | campusName}}的<span ng-if="user.gender">学长</span><span ng-if="!user.gender">学妹</span></p>
+                <p>积分: {{ user.money }}</p>
+                <p>贴子: {{ user.topicCount + user.replyCount }}</p>
+                <p>注册日期: {{ user.regDate | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                <p>上次登录: {{ user.lastLogin | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                {{ isCurrentUser }}
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
