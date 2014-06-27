@@ -6,7 +6,7 @@
  */
 
 (function () {
-    angular.module('app.services.Image', ['app.services.base', 'toaster', 'angularFileUpload', 'app.config']).service('ImageService', ['$q', '$http', 'BaseHttpService', 'appConf', '$location', 'toaster', '$upload', function ($q, $http, BaseHttpService, appConf, $location, toaster, $upload) {
+    angular.module('app.services.Image', ['app.services.base', 'ionic','toaster', 'angularFileUpload', 'app.config']).service('ImageService', ['$q', '$http', 'BaseHttpService', 'appConf', '$location', '$ionicLoading','toaster', '$upload', function ($q, $http, BaseHttpService, appConf, $location,$ionicLoading, toaster, $upload) {
         var ImageService = {
             token: null
         };
@@ -56,11 +56,19 @@
                         /* customize how data is added to formData. See #40#issuecomment-28612000 for sample code */
                         //formDataAppender: function(formData, key, val){}
                     }).progress(function (evt) {
-//                        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                        var percentage = parseInt(100.0 * evt.loaded / evt.total);
+                        $ionicLoading.show({
+                            template: '图片上传中...' + percentage + '%',
+                            noBackdrop: true,
+                            duration: 30000 // 30 sec
+                        });
+                        console.log('percent: ' + percentage);
                     }).success(function (data, status, headers, config) {
                         // file is uploaded successfully
+                        $ionicLoading.hide();
                         successCallBack(data, status, headers, config);
                     }).error(function (error) {
+                        $ionicLoading.hide();
                         errorCallback(error);
                     });
                 }
