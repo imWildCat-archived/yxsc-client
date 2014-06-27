@@ -20,7 +20,7 @@
         'toaster',
         'app.utilities.Geolocation',
         'app.services.User',
-        'app.controllers',
+        'app.controllers.App',
         'app.controllers.User',
         'app.controllers.SchoolNews',
         'app.controllers.Topic'
@@ -131,10 +131,8 @@
                 .state('app', {
                     url: "/app",
                     abstract: true,
-                    templateUrl: VIEWS_DIR + 'menu.html',
-                    controller: 'AppCtrl'
+                    templateUrl: VIEWS_DIR + 'menu.html'
                 })
-
 
                 .state('app.lost', {
                     url: '/topic_list/:type',
@@ -151,7 +149,7 @@
                     views: {
                         'menuContent': {
                             templateUrl: 'views/index.html',
-                            controller: 'TestCtrl'
+                            controller: 'AppCtrl.Index'
                         }
                     }
                 })
@@ -228,7 +226,7 @@
                     url: "/schoolNews",
                     abstract: true,
                     templateUrl: VIEWS_DIR + 'menu.html',
-                    controller: 'AppCtrl'
+//                    controller: 'AppCtrl'
                 })
                 .state('schoolNews.list', {
                     url: '/list',

@@ -34,18 +34,42 @@
   }
 }
 
-.filebox{width:120px;overflow:hidden;position:relative;
-  input[type=file]{position:absolute;left:0;top:0;z-index:2;opacity:0;}/*透明，绝对定位*/
-//  span{display:block;width:60px;line-height:28px;float:left;}/*模拟按钮*/
+.filebox {
+  width: 120px;
+  overflow: hidden;
+  position: relative;
+  input[type=file] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    opacity: 0;
+  }
+  /*透明，绝对定位*/
+  //  span{display:block;width:60px;line-height:28px;float:left;}/*模拟按钮*/
 }
 
-.content-img{
-  width:99%
+.content-img {
+  width: 99%
 }
-
-
 
 // footer title
 .bar.bar-footer .title {
   top: 5px;
+}
+
+// avatar fix
+.item-avatar img:first-child, .item-avatar .item-image, .item-avatar .item-content > img:first-child, .item-avatar .item-content .item-image, .item-avatar-left img:first-child, .item-avatar-left .item-image, .item-avatar-left .item-content > img:first-child, .item-avatar-left .item-content .item-image {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.item-avatar a {
+  color: #000;
+  text-decoration: none;
 }
