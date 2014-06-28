@@ -106,29 +106,38 @@
         };
 
         /**
-         * 获取用户信息
+         * 获取用户信息 (缓存10分钟)
          * @param userId
+         * @returns {promise|*}
          */
         UserService.getInfo = function (userId) {
-            return BaseHttpService.getWithUi('/user/' + userId + '/info', null);
+            return BaseHttpService.getWithUi('/user/' + userId + '/info', null, 6);
         };
 
         /**
-         * 获取用户话题
+         * 获取当前用户信息 (无缓存)
+         * @returns {promise|*}
+         */
+        UserService.getCurrentUserInfo = function () {
+            return BaseHttpService.getWithUi('/user/current/info', null);
+        };
+
+        /**
+         * 获取用户话题列表 (缓存1分钟)
          * @param userId
          * @returns {promise|*}
          */
         UserService.getTopics = function (userId) {
-            return BaseHttpService.getWithUi('/user/' + userId + '/topics', null);
+            return BaseHttpService.getWithUi('/user/' + userId + '/topics', null, 4);
         };
 
         /**
-         * 获取用户回复
+         * 获取用户回复列表 (缓存1分钟)
          * @param userId
          * @returns {promise|*}
          */
         UserService.getReplies = function (userId) {
-            return BaseHttpService.getWithUi('/user/' + userId + '/replies', null);
+            return BaseHttpService.getWithUi('/user/' + userId + '/replies', null, 4);
         };
 
         return UserService;

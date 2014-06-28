@@ -206,7 +206,7 @@
                     return;
                 }
 
-                TopicService.create($scope.newTopic).then(function (data) {
+                TopicService.postNew($scope.newTopic).then(function (data) {
                     toaster.pop('success', '发布成功');
                     $window.history.back();
                 });

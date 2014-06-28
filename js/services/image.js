@@ -42,7 +42,7 @@
             $scope.onFileSelect = function ($files) {
                 //$files: an array of files selected, each file has name, size, and type.
                 for (var i = 0; i < $files.length; i++) {
-                    toaster.pop('info', '上传中...');
+//                    toaster.pop('info', '上传中...');
                     var file = $files[i];
                     $scope.upload = $upload.upload({
                         url: 'http://api.tietuku.com/v1/Up', //upload.php script, node.js route, or servlet url

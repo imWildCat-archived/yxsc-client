@@ -13,13 +13,12 @@
          * @param newTopic
          * @returns {promise|*}
          */
-        TopicService.create = function (newTopic) {
-            // TODO: 换行没有实现
+        TopicService.postNew = function (newTopic) {
             return BaseHttpService.postWithUi('/topic/create', newTopic);
         };
 
         /**
-         * 获取话题列表
+         * 获取话题列表 (缓存15秒)
          * @param type {Number}
          * @param campus {Number}
          * @param page {Number}
@@ -31,16 +30,16 @@
                     type: type,
                     campus: campus,
                     page: page
-                });
+                }, 2);
         };
 
         /**
-         * 获取单个话题
+         * 获取单个话题 (缓存15秒)
          * @param id
          * @returns {promise|*}
          */
         TopicService.getSingle = function (id) {
-            return BaseHttpService.getWithUi('/topic/single/' + id, null);
+            return BaseHttpService.getWithUi('/topic/single/' + id, null, 2);
         };
 
         /**
