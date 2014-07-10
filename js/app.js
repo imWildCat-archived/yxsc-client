@@ -19,8 +19,10 @@
         'ionic',
         'toaster',
         'app.utilities.Geolocation',
+        'app.utilities.Preferences',
         'app.services.User',
         'app.controllers.App',
+        'app.controllers.Map',
         'app.controllers.User',
         'app.controllers.SchoolNews',
         'app.controllers.Topic'
@@ -78,7 +80,7 @@
 
         .filter('genderName', function () {
             return function (text) {
-                console.log('gender:'+text);
+                console.log('gender:' + text);
                 if (text) {
                     return '学长';
                 } else {
@@ -100,14 +102,8 @@
 //            }
 //        })
 
-        .run(function ($ionicPlatform, toaster, UserService, Geolocation) {
+        .run(function ($ionicPlatform, toaster, UserService, Preferences, Geolocation) {
             $ionicPlatform.ready(function () {
-                if (cordova) {
-                    setTimeout(function(){
-                        cordova.require('org.apache.cordova.splashscreen.SplashScreen').hide();
-                    },1000);
-
-                }
                 // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
                 // for form inputs)
                 if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -125,9 +121,21 @@
                 var _initCurrentCampus = function () {
                     Geolocation.getCampus().then(function (campus) {
                         UserService.clientData.currentCampus = campus;
+
+                        // 配置地图校区
+                        if (!Preferences.get('map_campus')) {
+                            Preferences.set('map_campus', campus);
+                        }
                     });
                 };
                 _initCurrentCampus();
+
+                // 隐藏加载图像
+                if (cordova) {
+                    setTimeout(function () {
+                        cordova.require('org.apache.cordova.splashscreen.SplashScreen').hide();
+                    }, 1000);
+                }
             });
         })
 
@@ -156,6 +164,16 @@
                         'menuContent': {
                             templateUrl: 'views/index.html',
                             controller: 'AppCtrl.Index'
+                        }
+                    }
+                })
+
+                .state('app.map', {
+                    url: '/map',
+                    views: {
+                        menuContent: {
+                            templateUrl: 'views/map/index.html',
+                            controller: 'MapCtrl.Index'
                         }
                     }
                 })
