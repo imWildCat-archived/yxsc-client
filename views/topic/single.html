@@ -20,6 +20,7 @@
                     <a href="#/user/info/{{ topic.author._id }}">
                         {{ topic.author.username }}
                     </a>
+                    <button ng-click="report()" class="button button-small" style="float:right">报告不适当内容</button>
                 </h2>
 
                 <p>{{ topic.date | date:'yyyy-MM-dd HH:mm:ss' }} <span style="float:right">楼主</span></p>
@@ -47,8 +48,8 @@
                             </a>
                         </h2>
 
-                        <p>{{ reply.date | date:'yyyy-MM-dd HH:mm:ss' }} <span
-                                style="float:right">#{{ reply.position }}</span></p>
+                        <p>{{ reply.date | date:'yyyy-MM-dd HH:mm:ss' }}
+                            <span style="float:right">#{{ reply.position }}</span></p>
                     </div>
 
                     <div ng-bind-html="reply.content | miniMarkdown" class="item item-body">

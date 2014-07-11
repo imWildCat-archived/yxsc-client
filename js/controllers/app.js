@@ -12,7 +12,7 @@
 
         // 注册 Controller
         .controller(CTRL_PRE + 'Index', function ($scope, $window, toaster, Preferences, UserService) {
-
+            $scope.user = UserService.currentUser;
         })
 
 

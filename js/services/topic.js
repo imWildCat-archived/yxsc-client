@@ -52,6 +52,15 @@
             return BaseHttpService.postWithUi('/topic/reply', newReply);
         };
 
+        /**
+         * 报告不适当话题
+         * @param topicId
+         * @returns {promise|*}
+         */
+        TopicService.report = function (topicId) {
+            return BaseHttpService.getWithUi('/topic/report/' + topicId, null, 9);
+        };
+
         return TopicService;
     }]);
 })();

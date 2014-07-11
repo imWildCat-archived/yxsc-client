@@ -143,7 +143,7 @@
         })
 
         // 阅读话题
-        .controller(CTRL_PRE + 'single', function ($scope, $location, $stateParams, toaster, UserService, TopicService) {
+        .controller(CTRL_PRE + 'single', function ($scope, $ionicPopup, $location, $stateParams, toaster, UserService, TopicService) {
             TopicService.getSingle($stateParams.id).then(function (data) {
                 $scope.topic = data.topic;
                 $scope.replies = data.replies;
@@ -157,6 +157,35 @@
                 }
 
                 $location.path('/topic/create/reply/' + $scope.topic._id);
+            }
+
+            /**
+             * 报告不适当内容
+             */
+            $scope.report = function () {
+                if (!UserService.checkLogin()) return;
+
+                $ionicPopup.confirm({
+                    title: '报告不适当内容',
+                    template: '您确定向管理团队报告本主题含有不适当内容吗？',
+                    buttons: [
+                        { //Array[Object] (optional). Buttons to place in the popup footer.
+                            text: '否',
+                            type: 'button-default'
+                        },
+                        {
+                            text: '是',
+                            type: 'button-positive',
+                            onTap: function (e) {
+                                TopicService.report($scope.topic._id).then(function(data){
+                                   if(data.reported == true){
+                                       toaster.pop('success','报告成功','感谢您的支持！');
+                                   }
+                                });
+                            }
+                        }
+                    ]
+                });
             }
         })
 
@@ -181,10 +210,10 @@
             // 初始化图片上传服务
             ImageService.getToken();
             ImageService.initImageService($scope, function (data) {
-                if($scope.newTopic.content){
-                    $scope.newTopic.content += '\n ![img]('+ data.t_url + ')';
+                if ($scope.newTopic.content) {
+                    $scope.newTopic.content += '\n ![img](' + data.t_url + ')';
                 } else {
-                    $scope.newTopic.content = '![img]('+ data.t_url + ')';
+                    $scope.newTopic.content = '![img](' + data.t_url + ')';
                 }
                 toaster.pop('info', '图片上传成功');
             }, function () {
@@ -225,10 +254,10 @@
             // 初始化图片上传服务
             ImageService.getToken();
             ImageService.initImageService($scope, function (data) {
-                if($scope.newReply.content){
-                    $scope.newReply.content += '\n ![img]('+ data.t_url + ')';
+                if ($scope.newReply.content) {
+                    $scope.newReply.content += '\n ![img](' + data.t_url + ')';
                 } else {
-                    $scope.newReply.content = '![img]('+ data.t_url + ')';
+                    $scope.newReply.content = '![img](' + data.t_url + ')';
                 }
                 toaster.pop('info', '图片上传成功');
             }, function () {

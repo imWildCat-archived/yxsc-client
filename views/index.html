@@ -1,31 +1,48 @@
-<ion-view title="印象·山财">
+<ion-view title="『印象·山财』">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     <ion-content class="has-header">
+        <img style="width: 100%" src="img/cuiyuan_by_wildcat.jpg"/>
+
+        <div ng-if="!user" class="item item-divider">
+            您尚未登录，您可以：
+        </div>
+        <div ng-if="user" class="list card">
+            <div class="item item-avatar">
+                <img src="{{ user.avatar || 'img/no_avatar.png' }}">
+
+                <h2>{{ user.username }}</h2>
+
+                <p>注册日期: {{ user.regDate | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                <p>上次登录: {{ user.lastLogin | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+                <p>财富:{{ user.money }}</p>
+            </div>
+        </div>
         <div class="list list-inset">
+            <div ng-if="!user">
+                <a class="button button-positive" href="#/user/login">
+                    登录
+                </a>
+
+                <a class="button button-calm" href="#/user/reg">
+                    注册
+                </a>
+            </div>
+
+            <div ng-if="user">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="button button-royal" href="#/user/edit">编辑用户资料</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
 
             <div class="card">
                 <div class="item item-text-wrap">
-                    这个界面的按钮正在规划中
+                    &nbsp;&nbsp;&nbsp;&nbsp;『印象·山财』是山东财经大学一个由学生组成的团队EiND Studio构建的学校应用，旨在丰富同学们的校园生活，促进同学们之间的沟通、交流，共建和谐美好校园。
                 </div>
             </div>
 
-            <a class="button button-positive" href="#/user/login">
-                登录
-            </a>
 
-            <a class="button button-calm" href="#/user/reg">
-                注册
-            </a>
-<br />
-            <hr />
-            <!--<button class="button button-info" ng-click="">Click</button>-->
-            <a class="button" href="#/user/edit">编辑用户资料</a>
-
-            <a class="button" href="#/user/change_password">修改密码</a>
-
-            <a class="button" href="#/user/change_password">修改密码</a>
         </div>
     </ion-content>
 </ion-view>
