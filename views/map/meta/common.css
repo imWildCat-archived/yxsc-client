@@ -4,3 +4,6 @@ body, html, #school-map {
     overflow: hidden;
     margin: 0;
 }
+.BMap_cpyCtrl.BMap_noprint.anchorBL{
+    display: none;
+}

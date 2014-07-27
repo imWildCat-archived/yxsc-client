@@ -110,6 +110,10 @@
         .controller(CTRL_PRE + 'Info', function ($scope, $window, $location, $stateParams, toaster, Preferences, UserService) {
             var userId = $stateParams['id'];
 
+            if(!UserService.checkLogin()){
+                return;
+            }
+
             UserService.getInfo(userId).then(function (data) {
                 $scope.user = data.user || null;
                 $scope.topics = data.topics;

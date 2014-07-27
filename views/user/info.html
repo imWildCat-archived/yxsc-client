@@ -7,7 +7,7 @@
                 <img src="{{ user.avatar || 'img/no_avatar.png' }}">
 
                 <h2>{{ user.username }}</h2>
-                <p>{{ user.campus | campusName}}的<span ng-if="user.gender">学长</span><span ng-if="!user.gender">学妹</span></p>
+                <p>{{ user.campus | campusName}}校区<span ng-if="user.gender === 2">的妹子</span><span ng-if="user.gender === 1">的汉子</span></p>
                 <p>积分: {{ user.money }}</p>
                 <p>贴子: {{ user.topicCount + user.replyCount }}</p>
                 <p>注册日期: {{ user.regDate | date:'yyyy-MM-dd HH:mm:ss'}}</p>

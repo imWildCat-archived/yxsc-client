@@ -101,6 +101,9 @@
 //                    .replace(/</g, '&lt;');
 //            }
 //        })
+        .constant('$ionicLoadingConfig', {
+            template: 'Default Loading Template...'
+        })
 
         .run(function ($ionicPlatform, toaster, UserService, Preferences, Geolocation) {
             $ionicPlatform.ready(function () {
