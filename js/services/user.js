@@ -127,8 +127,8 @@
          * @param userId
          * @returns {promise|*}
          */
-        UserService.getTopics = function (userId) {
-            return BaseHttpService.getWithUi('/user/' + userId + '/topics', null, 4);
+        UserService.getTopics = function (userId, page) {
+            return BaseHttpService.getWithUi('/user/' + userId + '/topics', {page: page || 1}, 4);
         };
 
         /**
@@ -136,8 +136,26 @@
          * @param userId
          * @returns {promise|*}
          */
-        UserService.getReplies = function (userId) {
-            return BaseHttpService.getWithUi('/user/' + userId + '/replies', null, 4);
+        UserService.getReplies = function (userId, page) {
+            return BaseHttpService.getWithUi('/user/' + userId + '/replies', {page: page || 1}, 4);
+        };
+
+        /**
+         * 获取当前用户提醒
+         * @param page
+         * @returns {promise|*}
+         */
+        UserService.getNotifications = function (page) {
+            return BaseHttpService.getWithUi('/noti/list', {page: page || 1}, 2);
+        };
+
+        /**
+         * 获取当前用户提醒数
+         * @param page
+         * @returns {promise|*}
+         */
+        UserService.getNotiCount = function () {
+            return BaseHttpService.getWithUi('/noti/count', null, 2);
         };
 
         return UserService;

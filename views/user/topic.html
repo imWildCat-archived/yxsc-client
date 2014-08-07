@@ -1,0 +1,10 @@
+<ion-view title="用户话题">
+    <ion-content class="has-header">
+        <ion-list class="custom-list">
+            <ion-item ng-repeat="topic in topics">
+                <a href="#/topic/single/{{topic._id}}">{{topic.subject}}</a>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll ng-if="!isLoading" on-infinite="loadMore()"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

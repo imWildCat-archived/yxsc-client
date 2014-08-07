@@ -21,6 +21,11 @@
              * 注册按钮点击
              */
             $scope.regFormSubmit = function () {
+                if ($scope.newUser.password != $scope.newUser.passwordRepeat) {
+                    toaster.pop('error', '两遍密码不一致，请重新输入。');
+                    return;
+                }
+
                 UserService.reg($scope.newUser).then(function (data) {
                     toaster.pop('success', '注册成功');
 
@@ -107,10 +112,11 @@
             };
         })
 
+        // 用户信息
         .controller(CTRL_PRE + 'Info', function ($scope, $window, $location, $stateParams, toaster, Preferences, UserService) {
             var userId = $stateParams['id'];
 
-            if(!UserService.checkLogin()){
+            if (!UserService.checkLogin()) {
                 return;
             }
 
@@ -124,6 +130,95 @@
                     $scope.isCurrentUser = false;
                 }
             });
+        })
+
+        // 用户话题
+        .controller(CTRL_PRE + 'Topic', function ($scope, $window, $location, $stateParams, toaster, Preferences, UserService) {
+            var userId = $stateParams['id'];
+            $scope.isLoading = false;
+            $scope.topics = [];
+            $scope.page = 0;
+
+            if (!UserService.checkLogin()) {
+                return;
+            }
+
+            $scope.loadMore = function () {
+                if ($scope.isLoading) {
+                    return;
+                } else {
+                    $scope.isLoading = true;
+                    $scope.page++;
+                    UserService.getTopics(userId, $scope.page).then(function (data) {
+                        if (data.length === 0) {
+                            $scope.isLoading = true;
+                        } else {
+                            $scope.topics = $scope.topics.concat(data);
+                            $scope.isLoading = false;
+                        }
+                    });
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            }
+        })
+
+        // 用户回复
+        .controller(CTRL_PRE + 'Reply', function ($scope, $window, $location, $stateParams, toaster, Preferences, UserService) {
+            var userId = $stateParams['id'];
+            $scope.isLoading = false;
+            $scope.replies = [];
+            $scope.page = 0;
+
+            if (!UserService.checkLogin()) {
+                return;
+            }
+
+            $scope.loadMore = function () {
+                if ($scope.isLoading) {
+                    return;
+                } else {
+                    $scope.isLoading = true;
+                    $scope.page++;
+                    UserService.getReplies(userId, $scope.page).then(function (data) {
+                        if (data.length === 0) {
+                            $scope.isLoading = true;
+                        } else {
+                            $scope.replies = $scope.replies.concat(data);
+                            $scope.isLoading = false;
+                        }
+                    });
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            }
+        })
+
+        // 用户提醒
+        .controller(CTRL_PRE + 'Notification', function ($scope, $window, $location, $stateParams, toaster, Preferences, UserService) {
+            $scope.isLoading = false;
+            $scope.notifications = [];
+            $scope.page = 0;
+
+            if (!UserService.checkLogin()) {
+                return;
+            }
+
+            $scope.loadMore = function () {
+                if ($scope.isLoading) {
+                    return;
+                } else {
+                    $scope.isLoading = true;
+                    $scope.page++;
+                    UserService.getNotifications($scope.page).then(function (data) {
+                        if (data.length === 0) {
+                            $scope.isLoading = true;
+                        } else {
+                            $scope.notifications = $scope.notifications.concat(data);
+                            $scope.isLoading = false;
+                        }
+                    });
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            }
         })
     ;
 })();

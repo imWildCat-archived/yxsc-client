@@ -1,0 +1,13 @@
+<ion-view title="用户回复">
+    <ion-content class="has-header">
+        <ion-list class="custom-list">
+            <ion-item ng-repeat="reply in replies">
+                <a style="display: block;" href="#/topic/single/{{reply.topic._id}}">
+                    <div>“{{reply.content}}”</div>
+                    <p style="text-align: right;">在《{{reply.topic.subject}}》中的回复</p>
+                </a>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll ng-if="!isLoading" on-infinite="loadMore()"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

@@ -5,7 +5,10 @@
     <ion-content class="has-header">
         <ion-list class="custom-list">
             <ion-item ng-repeat="item in newsList">
-                <a href="#/schoolNews/single/{{item._id}}">{{item.subject}}</a>
+                <a href="#/schoolNews/single/{{item._id}}">
+                    {{item.subject}}
+                    <p class="align-right">{{ item.editor }}</p>
+                </a>
             </ion-item>
         </ion-list>
         <ion-infinite-scroll ng-if="!isLoading" on-infinite="loadMore()"></ion-infinite-scroll>

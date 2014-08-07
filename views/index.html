@@ -23,18 +23,18 @@
         <div ng-if="user">
             <div class="list">
 
-                <a class="item item-icon-left" href="#">
+                <a class="item item-icon-left" href="#/user/notification">
                     <i class="icon ion-email"></i>
                     消息提醒
-                    <span class="badge badge-assertive">0</span>
+                    <span ng-if="notificationCount" class="badge badge-assertive">{{notificationCount}}</span>
                 </a>
 
-                <a class="item item-icon-left" href="#">
+                <a class="item item-icon-left" href="#/user/topic/{{user._id}}">
                     <i class="icon ion-document-text"></i>
                     我的话题
                 </a>
 
-                <a class="item item-icon-left" href="#">
+                <a class="item item-icon-left" href="#/user/reply/{{user._id}}">
                     <i class="icon ion-chatbubble-working"></i>
                     我的回复
                 </a>
@@ -44,7 +44,6 @@
                     修改资料
                 </a>
             </div>
-
         </div>
 
         <div ng-if="!user" class="item item-divider">

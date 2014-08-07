@@ -16,5 +16,18 @@
             </div>
         </div>
 
+        <div ng-if="user">
+            <div class="list">
+                <a class="item item-icon-left" href="#/user/topic/{{user._id}}">
+                    <i class="icon ion-document-text"></i>
+                    <span ng-if="user.gender === 2">她</span><span ng-if="user.gender === 1">他</span><span ng-if="user.gender === 0">他</span>的话题
+                </a>
+
+                <a class="item item-icon-left" href="#/user/reply/{{user._id}}">
+                    <i class="icon ion-chatbubble-working"></i>
+                    <span ng-if="user.gender === 2">她</span><span ng-if="user.gender === 1">他</span><span ng-if="user.gender === 0">他</span>的回复
+                </a>
+            </div>
+        </div>
     </ion-content>
 </ion-view>

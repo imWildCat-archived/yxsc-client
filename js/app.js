@@ -264,6 +264,36 @@
                         }
                     }
                 })
+
+                .state('user.topic', {
+                    url: '/topic/:id',
+                    views: {
+                        content: {
+                            templateUrl: USER_VIEWS_DIR + 'topic.html',
+                            controller: 'UserCtrl.Topic'
+                        }
+                    }
+                })
+
+                .state('user.reply', {
+                    url: '/reply/:id',
+                    views: {
+                        content: {
+                            templateUrl: USER_VIEWS_DIR + 'reply.html',
+                            controller: 'UserCtrl.Reply'
+                        }
+                    }
+                })
+
+                .state('user.notification', {
+                    url: '/notification',
+                    views: {
+                        content: {
+                            templateUrl: USER_VIEWS_DIR + 'notification.html',
+                            controller: 'UserCtrl.Notification'
+                        }
+                    }
+                })
         })
 
         .config(function ($stateProvider) {

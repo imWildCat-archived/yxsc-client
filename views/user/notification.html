@@ -1,0 +1,13 @@
+<ion-view title="消息提醒">
+    <ion-content class="has-header">
+        <ion-list class="custom-list">
+            <ion-item ng-repeat="noti in notifications">
+                <a style="display: block;" href="#/topic/single/{{noti.topic._id}}">
+                    <div>“{{noti.reply.content}}”</div>
+                    <p style="text-align: right;">{{ noti.from.username }} 在《{{noti.topic.subject}}》中回复了你</p>
+                </a>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll ng-if="!isLoading" on-infinite="loadMore()"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

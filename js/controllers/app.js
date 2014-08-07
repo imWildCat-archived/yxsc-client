@@ -13,6 +13,14 @@
         // 注册 Controller
         .controller(CTRL_PRE + 'Index', function ($scope, $window, toaster, Preferences, UserService) {
             $scope.user = UserService.currentUser;
+            $scope.notificationCount = false;
+
+            if($scope.user) {
+                UserService.getNotiCount().then(function (data) {
+                    if (data === 0) return;
+                    $scope.notificationCount = data;
+                });
+            }
         })
 
         .controller(CTRL_PRE + 'Pomotodo', function ($scope, $window, toaster, Preferences, UserService) {
