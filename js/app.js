@@ -171,6 +171,26 @@
                     }
                 })
 
+                .state('app.pomotodo', {
+                    url: '/pomotodo',
+                    views: {
+                        'menuContent': {
+                            templateUrl: 'views/pomotodo.html',
+                            controller: 'AppCtrl.Pomotodo'
+                        }
+                    }
+                })
+
+                .state('app.aboutus', {
+                    url: '/aboutus',
+                    views: {
+                        'menuContent': {
+                            templateUrl: 'views/aboutus.html',
+                            controller: 'AppCtrl.AboutUs'
+                        }
+                    }
+                })
+
                 .state('app.map', {
                     url: '/map',
                     views: {

@@ -8,5 +8,6 @@
                 <a href="#/schoolNews/single/{{item._id}}">{{item.subject}}</a>
             </ion-item>
         </ion-list>
+        <ion-infinite-scroll ng-if="!isLoading" on-infinite="loadMore()"></ion-infinite-scroll>
     </ion-content>
 </ion-view>

@@ -8,8 +8,8 @@
 (function () {
     angular.module('app.config', []).constant('appConf',
         {
-//            baseUrl: 'http://localhost:18080/api/v1',
-            baseUrl: 'https://yinxiangshancai.duapp.com/api/v1',
+            baseUrl: 'http://localhost:18080/api/v1',
+//            baseUrl: 'https://yinxiangshancai.duapp.com/api/v1',
             httpTimeout:30
         })
 //        .constant('CONF_BASE_URL','http://localhost:18080/api/vi')
@@ -27,6 +27,7 @@
             1104:'邮箱格式错误',
 
             1201:'您的积分不足，无法进行此操作',
+            1202:'请不要发言过快，上次发言30秒后方可继续',
 
             1301:'您输入的密码不正确，无法修改密码',
 

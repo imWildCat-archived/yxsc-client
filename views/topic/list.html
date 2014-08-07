@@ -5,7 +5,7 @@
     <ion-nav-buttons side="right">
         <a ng-click="newTopicButtonClick()" class="button button-icon icon ion-compose"></a>
     </ion-nav-buttons>
-    <ion-content class="has-header">
+    <ion-content class="has-header has-footer">
         <ion-list class="custom-list" style="padding-bottom: 40px;">
             <ion-item ng-repeat="item in list">
                 <a href="#/topic/single/{{item._id}}">{{item.subject}}</a>
