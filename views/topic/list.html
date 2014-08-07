@@ -8,7 +8,12 @@
     <ion-content class="has-header has-footer">
         <ion-list class="custom-list" style="padding-bottom: 40px;">
             <ion-item ng-repeat="item in list">
-                <a href="#/topic/single/{{item._id}}">{{item.subject}}</a>
+                <a href="#/topic/single/{{item._id}}">{{item.subject}}
+                <div class="meta">
+                    <span>{{ item.author.username }}</span>
+                    <span class="float-right">{{ item.date | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+                </div>
+                </a>
             </ion-item>
 
             <!--BUG： 如果不加这两个空item，最后一个主题会在footer下面-->
