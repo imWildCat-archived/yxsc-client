@@ -51,12 +51,12 @@
                  */
                 var uiLoading = {
                     show: function () {
-                        return;
                         $ionicLoading.show({
                             template: '加载中...',
                             noBackdrop: true,
                             duration: 30000 // 30 sec
                         });
+                        return;
                     },
                     hide: function () {
                         $ionicLoading.hide();
