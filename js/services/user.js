@@ -158,6 +158,10 @@
             return BaseHttpService.getWithUi('/noti/count', null, 2);
         };
 
+        UserService.getVersion = function() {
+            return BaseHttpService.get('/version', null, 9);
+        };
+
         return UserService;
     }]);
 

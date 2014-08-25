@@ -8,10 +8,10 @@
 (function () {
     const CTRL_PRE = 'AppCtrl.';
 
-    angular.module('app.controllers.App', ['toaster', 'app.utilities.Preferences', 'app.services.User', 'app.services.Image'])
+    angular.module('app.controllers.App', ['ionic', 'toaster', 'app.utilities.Preferences', 'app.services.User', 'app.services.Image', 'app.config'])
 
         // 注册 Controller
-        .controller(CTRL_PRE + 'Index', function ($scope, $window, toaster, Preferences, UserService) {
+        .controller(CTRL_PRE + 'Index', function ($scope, $window, $ionicPopup, toaster, Preferences, UserService, appVersion) {
             $scope.user = UserService.currentUser;
             $scope.notificationCount = false;
 
@@ -21,6 +21,66 @@
                     $scope.notificationCount = data;
                 });
             }
+
+            // 判断设备，只有在 Android 上才会出现更新功能
+            $scope.isAndroid = ionic.Platform.isAndroid();
+
+            // 检查更新
+            var _needUpdating = function (currentVersion, targetVersion) {
+                var splitVersionString = function (str) {
+                    return str.split('.');
+                };
+                var currentVersionArray = splitVersionString(currentVersion);
+                var targetVersionArray = splitVersionString(targetVersion);
+                for (var i = 1; i < targetVersionArray.length; i++) {
+                    var iCurrent = parseInt(currentVersionArray[i] || 0);
+                    var iTarget = parseInt(targetVersionArray[i] || 0);
+                    if (iTarget > iCurrent) return true;
+                    else if (iTarget < iCurrent) return false;
+                }
+                return false;
+            };
+            console.log('check updating');
+            var _performUpdating = function (force) {
+                if (!$scope.isAndroid) return;
+                force = force || false;
+                if (!force) {
+                    if ((Date.now() - (Preferences.get('last_updating_time') || 0)) < 60 * 60 * 1000) return;
+                }
+                UserService.getVersion().then(function (ret) {
+                    var targetVersionStr = ret.data.version;
+                    console.log(targetVersionStr);
+                    if (_needUpdating(appVersion, targetVersionStr)) {
+                        console.log('need updating');
+                        $ionicPopup.show({
+                            title: '有新版本更新啦',
+                            subTitle: '童鞋，是否更新呢？',
+                            scope: $scope,
+                            buttons: [
+                                { text: '取消' },
+                                {
+                                    text: '<b>更新</b>',
+                                    type: 'button-positive',
+                                    onTap: function (e) {
+                                        window.open(ret.data.link || 'http://anyu2u.sinaapp.com/latest.apk', '_system');
+                                        e.preventDefault();
+                                    }
+                                },
+                            ]
+                        });
+                    } else {
+                        console.log('do not need updating');
+                    }
+                }, function () {
+                    $ionicPopup.alert({
+                        title: '呜呜...检查更新失败啦'
+                    });
+                });
+                Preferences.set('last_updating_time', Date.now());
+            };
+
+            _performUpdating(true);
+
         })
 
         .controller(CTRL_PRE + 'Pomotodo', function ($scope, $window, toaster, Preferences, UserService) {
