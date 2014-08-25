@@ -6,7 +6,7 @@
  */
 
 (function () {
-    angular.module('app.services.Image', ['app.services.base', 'ionic','toaster', 'angularFileUpload', 'app.config']).service('ImageService', ['$q', '$http', 'BaseHttpService', 'appConf', '$location', '$ionicLoading','toaster', '$upload', function ($q, $http, BaseHttpService, appConf, $location,$ionicLoading, toaster, $upload) {
+    angular.module('app.services.Image', ['app.services.base', 'ionic', 'toaster', 'angularFileUpload', 'app.config']).service('ImageService', ['$q', '$http', 'BaseHttpService', 'appConf', '$location', '$ionicLoading', 'toaster', '$upload', function ($q, $http, BaseHttpService, appConf, $location, $ionicLoading, toaster, $upload) {
         var ImageService = {
             token: null
         };
@@ -24,8 +24,8 @@
             var deferred = $q.defer();
             $http({
                 method: 'POST',
-                url: 'http://api.tietuku.com/v1/Up',
-                params: {Token: ImageService.token},
+                url: 'http://up.tietuku.com',
+                params: {Token: ImageService.token, from: 'web'},
                 data: formData,
                 timeout: appConf.timeout,
 //                responseType: 'json',
