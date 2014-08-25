@@ -70,6 +70,11 @@
                         });
                     } else {
                         console.log('do not need updating');
+                        if(force) {
+                            $ionicPopup.alert({
+                                title: '当前版本已是最新'
+                            });
+                        }
                     }
                 }, function () {
                     $ionicPopup.alert({
@@ -79,7 +84,11 @@
                 Preferences.set('last_updating_time', Date.now());
             };
 
-            _performUpdating(true);
+            _performUpdating();
+
+            $scope.checkUpdating = function () {
+                _performUpdating(true);
+            }
 
         })
 

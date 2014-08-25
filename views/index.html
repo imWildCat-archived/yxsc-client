@@ -43,23 +43,31 @@
                     <i class="icon ion-gear-b"></i>
                     修改资料
                 </a>
+
+                <a ng-if="isAndroid" class="item item-icon-left" ng-click="checkUpdating()">
+                    <i class="icon ion-refresh"></i>
+                    检查更新
+                </a>
             </div>
         </div>
 
         <div ng-if="!user" class="item item-divider">
             您尚未登录，您可以：
         </div>
-        <div class="list list-inset">
-            <div ng-if="!user">
-                <a class="button button-positive" href="#/user/login">
-                    登录
-                </a>
+        <div ng-if="!user" class="list">
+            <a class="item item-icon-left" href="#/user/login">
+                <i class="icon ion-home"></i>
+                登录
+            </a>
 
-                <a class="button button-calm" href="#/user/reg">
-                    注册
-                </a>
-            </div>
-
+            <a class="item item-icon-left" href="#/user/reg">
+                <i class="icon ion-person-add"></i>
+                注册
+            </a>
+            <a ng-if="isAndroid" class="item item-icon-left" ng-click="checkUpdating()">
+                <i class="icon ion-refresh"></i>
+                检查更新
+            </a>
         </div>
         <div class="card">
             <div class="item item-text-wrap">

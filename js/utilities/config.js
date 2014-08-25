@@ -36,6 +36,6 @@
 //            2001: '这个话题没找到'
         })
 
-        .constant('appVersion', '0.2.0')
+        .constant('appVersion', '0.3.0')
     ;
 })();
