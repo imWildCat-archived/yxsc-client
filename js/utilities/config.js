@@ -9,7 +9,7 @@
     angular.module('app.config', []).constant('appConf',
         {
 //            baseUrl: 'http://localhost:18080/api/v1',
-            baseUrl: 'https://yinxiangshancai.duapp.com/api/v1',
+            baseUrl: 'http://yinxiangshancai.duapp.com/api/v1',
 //            baseUrl: 'http://www.yinxiangshancai.com/api/v1',
             httpTimeout:30
         })
@@ -36,6 +36,6 @@
 //            2001: '这个话题没找到'
         })
 
-        .constant('appVersion', '0.3.0')
+        .constant('appVersion', '0.6.0')
     ;
 })();

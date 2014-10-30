@@ -54,6 +54,10 @@
         // 注册 Controller
         .controller(CTRL_PRE + 'Index', function ($scope, $ionicActionSheet, $window, toaster, Preferences, UserService) {
 
+            var iframeWidth = 'width:' + document.body.clientWidth + 'px;';
+            var iframeHeight = 'height:' + (document.body.scrollHeight - (ionic.Platform.isIOS()? 60 : 45)) + 'px;';
+            $scope.iframeStyle = iframeHeight + iframeWidth + 'margin-bottom: 0;';
+
             _buildMapCampus(null, $scope, Preferences);
 
             var _chooseCampus = function (campus) {
