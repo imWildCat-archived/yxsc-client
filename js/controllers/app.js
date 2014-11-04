@@ -92,6 +92,11 @@
 
         })
 
+        .controller(CTRL_PRE + 'SchoolBusSchedule', function ($scope, $window, toaster, Preferences, UserService) {
+
+        })
+
+
         .controller(CTRL_PRE + 'Pomotodo', function ($scope, $window, toaster, Preferences, UserService) {
             $scope.loadWebsite = function () {
                 window.open('https://pomotodo.com/', '_system');

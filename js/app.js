@@ -25,7 +25,8 @@
         'app.controllers.Map',
         'app.controllers.User',
         'app.controllers.SchoolNews',
-        'app.controllers.Topic'
+        'app.controllers.Topic',
+        'app.controllers.FileTransfer'
     ])
 
 //        // 实现换行功能
@@ -169,6 +170,27 @@
                             controller: 'AppCtrl.Index'
                         }
                     }
+                })
+
+                .state('app.schoolBusSchedule', {
+                    url: '/school_bus_schedule',
+                    views: {
+                        'menuContent': {
+                            templateUrl: 'views/school_bus_schedule.html',
+                            controller: 'AppCtrl.SchoolBusSchedule'
+                        }
+                    }
+                })
+
+                .state('app.fileTransfer', {
+                    url: '/file_transfer',
+                    views: {
+                        'menuContent': {
+                            templateUrl: 'views/file_transfer/index.html',
+                            controller: 'FileTransferCtrl.Index'
+                        }
+                    }
+
                 })
 
                 .state('app.pomotodo', {

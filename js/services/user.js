@@ -128,7 +128,7 @@
          * @returns {promise|*}
          */
         UserService.getTopics = function (userId, page) {
-            return BaseHttpService.getWithUi('/user/' + userId + '/topics', {page: page || 1}, 4);
+            return BaseHttpService.get('/user/' + userId + '/topics', {page: page || 1});
         };
 
         /**
@@ -137,7 +137,7 @@
          * @returns {promise|*}
          */
         UserService.getReplies = function (userId, page) {
-            return BaseHttpService.getWithUi('/user/' + userId + '/replies', {page: page || 1}, 4);
+            return BaseHttpService.get('/user/' + userId + '/replies', {page: page || 1});
         };
 
         /**

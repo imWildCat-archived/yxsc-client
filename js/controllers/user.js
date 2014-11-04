@@ -149,11 +149,11 @@
                 } else {
                     $scope.isLoading = true;
                     $scope.page++;
-                    UserService.getTopics(userId, $scope.page).then(function (data) {
-                        if (data.length === 0) {
+                    UserService.getTopics(userId, $scope.page).then(function (res) {
+                        if (res.data.length === 0) {
                             $scope.isLoading = true;
                         } else {
-                            $scope.topics = $scope.topics.concat(data);
+                            $scope.topics = $scope.topics.concat(res.data);
                             $scope.isLoading = false;
                         }
                     });
@@ -179,11 +179,11 @@
                 } else {
                     $scope.isLoading = true;
                     $scope.page++;
-                    UserService.getReplies(userId, $scope.page).then(function (data) {
-                        if (data.length === 0) {
+                    UserService.getReplies(userId, $scope.page).then(function (ret) {
+                        if (ret.data.length === 0) {
                             $scope.isLoading = true;
                         } else {
-                            $scope.replies = $scope.replies.concat(data);
+                            $scope.replies = $scope.replies.concat(ret.data);
                             $scope.isLoading = false;
                         }
                     });

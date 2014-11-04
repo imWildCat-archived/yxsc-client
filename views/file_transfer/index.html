@@ -1,0 +1,18 @@
+<ion-view title="文件交换">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header">
+        <form novalidate class="css-form" name="fileForm" ng-controller="FileTransferCtrl.Index" ng-submit="getFile()">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="text" ng-model="file.code" placeholder="请输入提取码">
+                </label>
+                <button class="button button-full button-positive" ng-disabled="fileForm.$invalid">
+                    提取文件
+                </button>
+            </div>
+        </form>
+
+    </ion-content>
+</ion-view>
